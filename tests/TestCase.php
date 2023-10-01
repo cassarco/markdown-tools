@@ -2,12 +2,15 @@
 
 namespace Carlcassar\Lark\Tests;
 
+use Carlcassar\Lark\Lark;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Carlcassar\Lark\LarkServiceProvider;
 
 class TestCase extends Orchestra
 {
+    public Lark $lark;
+
     protected function setUp(): void
     {
         parent::setUp();
