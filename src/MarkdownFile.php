@@ -22,9 +22,9 @@ class MarkdownFile
 
     private string $pathname;
 
-    protected Filesystem $filesystem;
+    private Filesystem $filesystem;
 
-    protected RenderedContentInterface $content;
+    private RenderedContentInterface $content;
 
     /**
      * @throws FileNotFoundException
@@ -40,6 +40,10 @@ class MarkdownFile
         $this->generateRenderedContent();
     }
 
+    /**
+     * @throws FileNotFoundException
+     * @throws CommonMarkException
+     */
     public static function from(SplFileInfo $splFileInfo): static
     {
         return new static($splFileInfo->getFilename(), $splFileInfo->getPathname());

@@ -3,29 +3,48 @@
 use Carlcassar\Lark\LarkFrontMatterKeyOrder;
 use Carlcassar\Lark\MarkdownFile;
 
-// config for Carlcassar/Lark
 return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Lark Schemes
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure as many lark "schemes disks" as you wish. Each
+    | scheme will contain the configuration for a folder containing that
+    | contains markdown files or alternatively a single markdown file.
+    |
+    | Visit the documentation for more information.
+    |
+    */
+
     'schemes' => [
+
+        // Give each scheme a name for your own organisation.
         'articles' => [
+
+            // Give the path to a folder of markdown files or a single markdown file.
             'path' => 'resources/markdown',
+
             'validation' => [
+
+                // Specify the validation rules for front-matter properties.
                 'rules' => [
                     'title' => 'required',
-                    'slug',
-                    'author',
-                    'description',
-                    'tags',
-                    'image',
-                    'link',
-                    'published_at',
-                    'created_at',
-                    'updated_at',
-                    'deleted_at',
                 ],
-                'order' => LarkFrontMatterKeyOrder::RuleOrder,
+
+                // Specify validation for the order of front-matter properties.
+                'order' => LarkFrontMatterKeyOrder::None,
             ],
+
+            // Define a handler for each markdown file. You will have access to file:
+            //  - front-matter values
+            //  - markdown
+            //  - html
+            //  - htmlWithToc
+            //  - toc
             'handler' => function (MarkdownFile $file) {
-                echo $file->filename();
+                // Do Something with each Markdown File.
             },
         ],
     ],
