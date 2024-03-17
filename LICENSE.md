@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) cassarco <mail@cassar.co>
+Copyright (c) Cassar & Co <mail@cassar.co>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
