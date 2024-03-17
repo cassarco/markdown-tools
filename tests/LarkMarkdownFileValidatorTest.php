@@ -4,6 +4,7 @@ use Carlcassar\Lark\Exceptions\LarkValidationException;
 use Carlcassar\Lark\LarkFrontMatterKeyOrder;
 use Carlcassar\Lark\LarkMarkdownFileValidator;
 use Carlcassar\Lark\MarkdownFile;
+
 use function Pest\testDirectory;
 
 it('can validate front-matter keys with laravel validator', /* @throws LarkValidationException */ function () {
@@ -11,8 +12,8 @@ it('can validate front-matter keys with laravel validator', /* @throws LarkValid
 
     (new LarkMarkdownFileValidator($file, [
         'rules' => [
-            'title' => 'required'
-        ]
+            'title' => 'required',
+        ],
     ]))->validate();
 })->throws(LarkValidationException::class, 'hello-world.md: The title field is required.');
 
@@ -24,6 +25,6 @@ it('can validate that the front-matter keys follow the validation rules order', 
             'tags',
             'title',
         ],
-        'order' => LarkFrontMatterKeyOrder::RuleOrder
+        'order' => LarkFrontMatterKeyOrder::RuleOrder,
     ]))->validate();
 })->throws(LarkValidationException::class, 'front-matter.md: Keys are not in the correct order: tags, title');

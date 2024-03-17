@@ -1,7 +1,7 @@
 <?php
 
-use Carlcassar\Lark\MarkdownFile;
 use Carlcassar\Lark\LarkFrontMatterKeyOrder;
+use Carlcassar\Lark\MarkdownFile;
 
 // config for Carlcassar/Lark
 return [
@@ -24,8 +24,8 @@ return [
                 ],
                 'order' => LarkFrontMatterKeyOrder::RuleOrder,
             ],
-            'handler' => function(MarkdownFile $file) {
-                echo($file->filename());
+            'handler' => function (MarkdownFile $file) {
+                echo $file->filename();
             },
         ],
     ],

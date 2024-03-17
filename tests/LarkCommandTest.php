@@ -1,6 +1,7 @@
 <?php
 
 use Carlcassar\Lark\MarkdownFile;
+
 use function Pest\testDirectory;
 
 beforeEach(closure: function () {
@@ -23,8 +24,8 @@ beforeEach(closure: function () {
             'handler' => function (MarkdownFile $file) {
                 //
             },
-            'sort' => 'rule-order'
-        ]
+            'sort' => 'rule-order',
+        ],
     ]);
 });
 

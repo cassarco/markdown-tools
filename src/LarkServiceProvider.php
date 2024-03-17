@@ -2,9 +2,9 @@
 
 namespace Carlcassar\Lark;
 
+use Carlcassar\Lark\Commands\LarkCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Carlcassar\Lark\Commands\LarkCommand;
 
 class LarkServiceProvider extends PackageServiceProvider
 {

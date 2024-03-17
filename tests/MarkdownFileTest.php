@@ -2,6 +2,7 @@
 
 use Carlcassar\Lark\LarkScheme;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+
 use function Pest\testDirectory;
 
 beforeEach(function () {
@@ -52,7 +53,7 @@ it('can get the front-matter data for a file', function () {
 it('can return the table of contents for a markdown file', function () {
     $markdownFile = $this->scheme->markdownFileCalled('toc.md'); /* @phpstan-ignore-line */
 
-    $expectedToc = <<<HTML
+    $expectedToc = <<<'HTML'
 <ul class="table-of-contents">
 <li>
 <a href="#title">Title</a>

@@ -31,7 +31,6 @@ class LarkMarkdownFileValidator
     }
 
     /**
-     * @return void
      * @throws LarkValidationException
      */
     private function validateKeys(): void
@@ -46,7 +45,6 @@ class LarkMarkdownFileValidator
     }
 
     /**
-     * @return void
      * @throws LarkValidationException
      */
     private function validateOrder(): void

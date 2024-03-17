@@ -7,8 +7,8 @@ use Illuminate\Support\Collection;
 beforeEach(closure: function () {
     config()->set('lark.schemes', [
         [
-            'path' => ''
-        ]
+            'path' => '',
+        ],
     ]);
 });
 
@@ -23,7 +23,7 @@ it('can be called using a facade', function () {
 it('can get a collection of import schemes', function () {
     config()->set('lark.schemes', [
         'articles' => ['path' => ''],
-        'tags' => ['path' => '']
+        'tags' => ['path' => ''],
     ]);
 
     $schemes = (new Lark)->schemes();

@@ -106,7 +106,7 @@ class MarkdownFile
                 'aria_hidden' => false,
                 'id_prefix' => '',
                 'fragment_prefix' => '',
-            ]
+            ],
         ]);
 
         $environment->addExtension(new CommonMarkCoreExtension());

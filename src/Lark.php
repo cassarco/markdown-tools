@@ -16,7 +16,7 @@ class Lark
     public function handle(): void
     {
         $this->config->schemes()
-            ->each(fn(LarkScheme $scheme) => $scheme->handle());
+            ->each(fn (LarkScheme $scheme) => $scheme->handle());
     }
 
     public function schemes(): Collection

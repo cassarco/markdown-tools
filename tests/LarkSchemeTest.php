@@ -1,19 +1,18 @@
 <?php
 
 use Carlcassar\Lark\LarkScheme;
-
 use Carlcassar\Lark\MarkdownFile;
 use Illuminate\Support\Collection;
+
 use function Pest\testDirectory;
 
-it('can be initialised with a path', function() {
+it('can be initialised with a path', function () {
     $scheme = new LarkScheme(
         path: testDirectory('markdown')
     );
 
     expect($scheme)->toBeInstanceOf(LarkScheme::class);
 });
-
 
 it('can get a collection of markdown files for the scheme', function () {
     $scheme = new LarkScheme(

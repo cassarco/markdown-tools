@@ -13,7 +13,9 @@ class LarkScheme
     private Filesystem $filesystem;
 
     private string $path;
+
     private Closure $handler;
+
     private array $validation = [];
 
     public function __construct(string $path)
@@ -46,7 +48,7 @@ class LarkScheme
             });
         }
 
-        return collect($files)->map(fn(SplFileInfo $splFileInfo) => MarkdownFile::from($splFileInfo));
+        return collect($files)->map(fn (SplFileInfo $splFileInfo) => MarkdownFile::from($splFileInfo));
     }
 
     /**
@@ -73,7 +75,7 @@ class LarkScheme
     public function handle(): void
     {
         $this->markdownFiles()
-            ->each(fn(MarkdownFile $file) => $this->validate($file))
-            ->each(fn(MarkdownFile $file) => ($this->handler)($file));
+            ->each(fn (MarkdownFile $file) => $this->validate($file))
+            ->each(fn (MarkdownFile $file) => ($this->handler)($file));
     }
 }

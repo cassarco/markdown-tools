@@ -11,7 +11,7 @@ class LarkConfig
     private array $config;
 
     private array $requiredKeys = [
-        'path'
+        'path',
     ];
 
     private Collection $schemes;
@@ -42,7 +42,7 @@ class LarkConfig
 
         foreach ($this->config['schemes'] as $scheme) {
             foreach ($this->requiredKeys as $key) {
-                if (!key_exists($key, $scheme)) {
+                if (! array_key_exists($key, $scheme)) {
                     throw new LarkInvalidSchemeException("Every scheme must have a {$key} key");
                 }
             }
@@ -57,11 +57,11 @@ class LarkConfig
         return collect($this->config['schemes'])->map(function ($scheme) {
             $larkScheme = new LarkScheme(path: $scheme['path']);
 
-            if (key_exists('validation', $scheme)) {
+            if (array_key_exists('validation', $scheme)) {
                 $larkScheme->withValidation($scheme['validation']);
             }
 
-            if (key_exists('handler', $scheme)) {
+            if (array_key_exists('handler', $scheme)) {
                 $larkScheme->withHandler($scheme['handler']);
             }
 
