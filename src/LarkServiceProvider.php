@@ -18,8 +18,6 @@ class LarkServiceProvider extends PackageServiceProvider
         $package
             ->name('lark')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_lark_table')
             ->hasCommand(LarkCommand::class);
     }
 }
