@@ -48,3 +48,25 @@ it('can get the front-matter data for a file', function () {
         ],
     ]);
 });
+
+it('can return the table of contents for a markdown file', function () {
+    $markdownFile = $this->scheme->markdownFileCalled('toc.md'); /* @phpstan-ignore-line */
+
+    $expectedToc = <<<HTML
+<ul class="table-of-contents">
+<li>
+<a href="#title">Title</a>
+<ul>
+<li>
+<a href="#heading">Heading</a>
+</li>
+<li>
+<a href="#subheading">SubHeading</a>
+</li>
+</ul>
+</li>
+</ul>
+HTML;
+
+    expect($markdownFile->toc())->toBe($expectedToc);
+});
