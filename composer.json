@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.3",
         "carlcassar/league-commonmark-wikilinks": "dev-main",
         "illuminate/contracts": "^10.0",
         "spatie/laravel-package-tools": "^1.14.0",
