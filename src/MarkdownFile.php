@@ -94,7 +94,7 @@ class MarkdownFile
         $crawler = new Crawler($this->htmlWithToc());
         $ulNodes = $crawler->filter('ul.table-of-contents');
 
-        // TODO: Add a test for this code
+        // TODO: Add a test for this code.
         if($ulNodes->first()->count()) {
             return $ulNodes->first()->outerHtml();
         } else {
