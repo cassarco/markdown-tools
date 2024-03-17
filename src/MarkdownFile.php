@@ -15,15 +15,23 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class MarkdownFile
 {
-    protected SplFileInfo $splFileInfo;
+    private string $filename;
+
+    private string $pathname;
 
     protected Filesystem $filesystem;
 
     protected RenderedContentInterface $content;
 
-    final public function __construct(SplFileInfo $splFileInfo)
+    /**
+     * @throws FileNotFoundException
+     * @throws CommonMarkException
+     */
+    final public function __construct(string $filename, string $pathname)
     {
-        $this->splFileInfo = $splFileInfo;
+        $this->filename = $filename;
+        $this->pathname = $pathname;
+
         $this->filesystem = new Filesystem();
 
         $this->generateRenderedContent();
@@ -31,17 +39,17 @@ class MarkdownFile
 
     public static function from(SplFileInfo $splFileInfo): static
     {
-        return new static($splFileInfo);
+        return new static($splFileInfo->getFilename(), $splFileInfo->getPathname());
     }
 
     public function pathname(): string
     {
-        return $this->splFileInfo->getPathname();
+        return $this->pathname;
     }
 
     public function filename(): string
     {
-        return $this->splFileInfo->getFilename();
+        return $this->filename;
     }
 
     /**
@@ -57,9 +65,9 @@ class MarkdownFile
         return trim($this->content->getContent());
     }
 
-    public function frontMatter()
+    public function frontMatter(): array
     {
-        return $this->content->getDocument()->data['front_matter'];
+        return $this->content->getDocument()->data['front_matter'] ?? [];
     }
 
     /**

@@ -1,49 +1,43 @@
 <?php
 
-use Carlcassar\Lark\Lark;
-use Carlcassar\Lark\MarkdownFile;
-
+use Carlcassar\Lark\LarkScheme;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use function Pest\testDirectory;
 
 beforeEach(function () {
-    config()->set('lark.path', testDirectory('markdown'));
+    $this->scheme = new LarkScheme(testDirectory('markdown')); /* @phpstan-ignore-line */
 });
 
 it('can get the pathname for a file', function () {
-    /** @var MarkdownFile $markdownFile */
-    $markdownFile = (new Lark())->getMarkdownFiles()->first();
+    $markdownFile = $this->scheme->markdownFileCalled('hello-world.md'); /* @phpstan-ignore-line */
 
-    expect($markdownFile->pathname())->toBe('tests/markdown/example.md');
+    expect($markdownFile->pathname())->toBe('tests/markdown/hello-world.md');
 });
 
 it('can get the filename for a file', function () {
-    /** @var MarkdownFile $markdownFile */
-    $markdownFile = (new Lark())->getMarkdownFiles()->first();
+    $markdownFile = $this->scheme->markdownFileCalled('hello-world.md'); /* @phpstan-ignore-line */
 
-    expect($markdownFile->filename())->toBe('example.md');
+    expect($markdownFile->filename())->toBe('hello-world.md');
 });
 
-it('can get the markdown content for a file', function () {
-    /** @var MarkdownFile $markdownFile */
-    $markdownFile = (new Lark())->getMarkdownFiles()->first();
+it('can get the markdown content for a file', /* @throws FileNotFoundException */ function () {
+    $markdownFile = $this->scheme->markdownFileCalled('hello-world.md'); /* @phpstan-ignore-line */
 
     expect($markdownFile->markdown())->toEqual(
-        file_get_contents('tests/markdown/example.md')
+        file_get_contents('tests/markdown/hello-world.md')
     );
 });
 
 it('can get the html content for a file', function () {
-    /** @var MarkdownFile $markdownFile */
-    $markdownFile = (new Lark())->getMarkdownFiles()->first();
+    $markdownFile = $this->scheme->markdownFileCalled('hello-world.md'); /* @phpstan-ignore-line */
 
     expect($markdownFile->html())->toEqual(
-        '<h1>An Example Markdown File</h1>'
+        '<p>Hello World!</p>'
     );
 });
 
 it('can get the front-matter data for a file', function () {
-    /** @var MarkdownFile $markdownFile */
-    $markdownFile = (new Lark())->getMarkdownFiles()->get(1);
+    $markdownFile = $this->scheme->markdownFileCalled('front-matter.md'); /* @phpstan-ignore-line */
 
     expect($markdownFile->frontMatter())->toEqual([
         'title' => 'Some Title',

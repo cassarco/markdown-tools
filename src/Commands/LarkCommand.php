@@ -2,17 +2,20 @@
 
 namespace Carlcassar\Lark\Commands;
 
+use Carlcassar\Lark\Facades\Lark;
 use Illuminate\Console\Command;
 
 class LarkCommand extends Command
 {
-    public $signature = 'lark';
+    public $signature = 'lark:process';
 
-    public $description = 'My command';
+    public $description = 'Process schemes in your lark config.';
 
     public function handle(): int
     {
-        $this->comment('All done');
+        Lark::handle();
+
+        $this->comment('Your Lark Schemes have all been process successfully.');
 
         return self::SUCCESS;
     }
