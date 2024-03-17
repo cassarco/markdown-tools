@@ -36,11 +36,11 @@ class LarkConfig
      */
     private function validateSchemes(): void
     {
-        if (empty($this->config)) {
+        if (empty($this->config['schemes'])) {
             throw new LarkNoSchemesDefinedException;
         }
 
-        foreach ($this->config as $scheme) {
+        foreach ($this->config['schemes'] as $scheme) {
             foreach ($this->requiredKeys as $key) {
                 if (!key_exists($key, $scheme)) {
                     throw new LarkInvalidSchemeException("Every scheme must have a {$key} key");
@@ -54,7 +54,7 @@ class LarkConfig
      */
     private function makeSchemes(): Collection
     {
-        return collect($this->config)->map(function ($scheme) {
+        return collect($this->config['schemes'])->map(function ($scheme) {
             $larkScheme = new LarkScheme(path: $scheme['path']);
 
             if (key_exists('validation', $scheme)) {

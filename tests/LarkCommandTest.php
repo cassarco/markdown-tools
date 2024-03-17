@@ -4,7 +4,7 @@ use Carlcassar\Lark\MarkdownFile;
 use function Pest\testDirectory;
 
 beforeEach(closure: function () {
-    config()->set('lark', [
+    config()->set('lark.schemes', [
         'articles' => [
             'path' => testDirectory('markdown/articles'),
             'rules' => [

@@ -5,8 +5,7 @@ use Carlcassar\Lark\LarkScheme;
 use Illuminate\Support\Collection;
 
 beforeEach(closure: function () {
-//    config()->set('lark', testDirectory('markdown'));
-    config()->set('lark', [
+    config()->set('lark.schemes', [
         [
             'path' => ''
         ]
@@ -22,7 +21,7 @@ it('can be called using a facade', function () {
 })->throwsNoExceptions();
 
 it('can get a collection of import schemes', function () {
-    config()->set('lark', [
+    config()->set('lark.schemes', [
         'articles' => ['path' => ''],
         'tags' => ['path' => '']
     ]);
