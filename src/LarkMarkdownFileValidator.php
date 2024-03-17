@@ -1,8 +1,8 @@
 <?php
 
-namespace Carlcassar\Lark;
+namespace Cassarco\Lark;
 
-use Carlcassar\Lark\Exceptions\LarkValidationException;
+use Cassarco\Lark\Exceptions\LarkValidationException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Carlcassar\Lark\Tests;
+namespace Cassarco\Lark\Tests;
 
-use Carlcassar\Lark\Lark;
-use Carlcassar\Lark\LarkServiceProvider;
+use Cassarco\Lark\Lark;
+use Cassarco\Lark\LarkServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -16,7 +16,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Carlcassar\\Lark\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Cassarco\\Lark\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

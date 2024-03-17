@@ -1,23 +1,24 @@
 {
-    "name": "carlcassar/lark",
+    "name": "cassarco/lark",
     "description": "A package for Laravel that let's you import markdown files into Laravel models.",
     "keywords": [
-        "carlcassar",
+        "cassarco",
         "laravel",
-        "lark"
+        "lark",
+        "markdown"
     ],
-    "homepage": "https://github.com/carlcassar/lark",
+    "homepage": "https://github.com/cassarco/lark",
     "license": "MIT",
     "authors": [
         {
-            "name": "Carl Cassar",
-            "email": "code@carlcassar.com",
+            "name": "Cassarco",
+            "email": "mail@cassar.co",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.3",
-        "carlcassar/league-commonmark-wikilinks": "dev-main",
+        "cassarco/league-commonmark-wikilinks": "dev-main",
         "illuminate/contracts": "^10.0",
         "spatie/laravel-package-tools": "^1.14.0",
         "symfony/dom-crawler": "^7.0"
@@ -37,12 +38,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Carlcassar\\Lark\\": "src/"
+            "Cassarco\\Lark\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Carlcassar\\Lark\\Tests\\": "tests/",
+            "Cassarco\\Lark\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -74,10 +75,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Carlcassar\\Lark\\LarkServiceProvider"
+                "Cassarco\\Lark\\LarkServiceProvider"
             ],
             "aliases": {
-                "Lark": "Carlcassar\\Lark\\Facades\\Lark"
+                "Lark": "Cassarco\\Lark\\Facades\\Lark"
             }
         }
     },

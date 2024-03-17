@@ -1,9 +1,9 @@
 <?php
 
-namespace Carlcassar\Lark;
+namespace Cassarco\Lark;
 
-use Carlcassar\Lark\Exceptions\LarkInvalidSchemeException;
-use Carlcassar\Lark\Exceptions\LarkNoSchemesDefinedException;
+use Cassarco\Lark\Exceptions\LarkInvalidSchemeException;
+use Cassarco\Lark\Exceptions\LarkNoSchemesDefinedException;
 use Illuminate\Support\Collection;
 
 class LarkConfig

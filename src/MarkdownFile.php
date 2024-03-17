@@ -1,6 +1,6 @@
 <?php
 
-namespace Carlcassar\Lark;
+namespace Cassarco\Lark;
 
 use Cassar\LeagueCommonmarkWikilinks\WikilinksExtension;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;

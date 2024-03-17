@@ -1,6 +1,6 @@
 <?php
 
-use Carlcassar\Lark\LarkScheme;
+use Cassarco\Lark\LarkScheme;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 use function Pest\testDirectory;

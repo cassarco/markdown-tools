@@ -1,8 +1,8 @@
 <?php
 
-namespace Carlcassar\Lark\Commands;
+namespace Cassarco\Lark\Commands;
 
-use Carlcassar\Lark\Facades\Lark;
+use Cassarco\Lark\Facades\Lark;
 use Illuminate\Console\Command;
 
 class LarkCommand extends Command

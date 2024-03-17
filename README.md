@@ -1,9 +1,9 @@
 # A package for Laravel that let's you import markdown files into Laravel models.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/carlcassar/lark.svg?style=flat-square)](https://packagist.org/packages/carlcassar/lark)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/carlcassar/lark/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/carlcassar/lark/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/carlcassar/lark/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/carlcassar/lark/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/carlcassar/lark.svg?style=flat-square)](https://packagist.org/packages/carlcassar/lark)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/cassarco/lark.svg?style=flat-square)](https://packagist.org/packages/cassarco/lark)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/cassarco/lark/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/cassarco/lark/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/cassarco/lark/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/cassarco/lark/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/cassarco/lark.svg?style=flat-square)](https://packagist.org/packages/cassarco/lark)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
@@ -20,7 +20,7 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require carlcassar/lark
+composer require cassarco/lark
 ```
 
 You can publish and run the migrations with:
@@ -52,8 +52,8 @@ php artisan vendor:publish --tag="lark-views"
 ## Usage
 
 ```php
-$lark = new Carlcassar\Lark();
-echo $lark->echoPhrase('Hello, Carlcassar!');
+$lark = new Cassarco\Lark();
+echo $lark->echoPhrase('Hello, Cassarco!');
 ```
 
 ## Testing
@@ -76,7 +76,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Carl Cassar](https://github.com/carlcassar)
+- [Carl Cassar](https://github.com/cassarco)
 - [All Contributors](../../contributors)
 
 ## License

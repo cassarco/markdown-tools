@@ -1,8 +1,8 @@
 <?php
 
-namespace Carlcassar\Lark;
+namespace Cassarco\Lark;
 
-use Carlcassar\Lark\Commands\LarkCommand;
+use Cassarco\Lark\Commands\LarkCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

@@ -1,6 +1,6 @@
 <?php
 
-use Carlcassar\Lark\MarkdownFile;
+use Cassarco\Lark\MarkdownFile;
 
 use function Pest\testDirectory;
 

@@ -1,7 +1,7 @@
 <?php
 
-use Carlcassar\Lark\LarkFrontMatterKeyOrder;
-use Carlcassar\Lark\MarkdownFile;
+use Cassarco\Lark\LarkFrontMatterKeyOrder;
+use Cassarco\Lark\MarkdownFile;
 
 return [
 

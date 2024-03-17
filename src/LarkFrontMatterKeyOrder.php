@@ -1,6 +1,6 @@
 <?php
 
-namespace Carlcassar\Lark;
+namespace Cassarco\Lark;
 
 enum LarkFrontMatterKeyOrder
 {

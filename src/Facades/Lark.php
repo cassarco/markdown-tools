@@ -1,16 +1,16 @@
 <?php
 
-namespace Carlcassar\Lark\Facades;
+namespace Cassarco\Lark\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Carlcassar\Lark\Lark
+ * @see \Cassarco\Lark\Lark
  */
 class Lark extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Carlcassar\Lark\Lark::class;
+        return \Cassarco\Lark\Lark::class;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
-use Carlcassar\Lark\LarkScheme;
-use Carlcassar\Lark\MarkdownFile;
+use Cassarco\Lark\LarkScheme;
+use Cassarco\Lark\MarkdownFile;
 use Illuminate\Support\Collection;
 
 use function Pest\testDirectory;

@@ -1,5 +1,5 @@
 <?php
 
-use Carlcassar\Lark\Tests\TestCase;
+use Cassarco\Lark\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

@@ -1,7 +1,7 @@
 <?php
 
-use Carlcassar\Lark\Lark;
-use Carlcassar\Lark\LarkScheme;
+use Cassarco\Lark\Lark;
+use Cassarco\Lark\LarkScheme;
 use Illuminate\Support\Collection;
 
 beforeEach(closure: function () {
@@ -17,7 +17,7 @@ it('is alive', function () {
 });
 
 it('can be called using a facade', function () {
-    \Carlcassar\Lark\Facades\Lark::schemes();
+    \Cassarco\Lark\Facades\Lark::schemes();
 })->throwsNoExceptions();
 
 it('can get a collection of import schemes', function () {

@@ -1,9 +1,9 @@
 <?php
 
-use Carlcassar\Lark\Exceptions\LarkValidationException;
-use Carlcassar\Lark\LarkFrontMatterKeyOrder;
-use Carlcassar\Lark\LarkMarkdownFileValidator;
-use Carlcassar\Lark\MarkdownFile;
+use Cassarco\Lark\Exceptions\LarkValidationException;
+use Cassarco\Lark\LarkFrontMatterKeyOrder;
+use Cassarco\Lark\LarkMarkdownFileValidator;
+use Cassarco\Lark\MarkdownFile;
 
 use function Pest\testDirectory;
 

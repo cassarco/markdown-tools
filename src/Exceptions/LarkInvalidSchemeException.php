@@ -1,6 +1,6 @@
 <?php
 
-namespace Carlcassar\Lark\Exceptions;
+namespace Cassarco\Lark\Exceptions;
 
 class LarkInvalidSchemeException extends LarkException
 {

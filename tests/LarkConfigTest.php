@@ -1,8 +1,8 @@
 <?php
 
-use Carlcassar\Lark\Exceptions\LarkInvalidSchemeException;
-use Carlcassar\Lark\Exceptions\LarkNoSchemesDefinedException;
-use Carlcassar\Lark\LarkConfig;
+use Cassarco\Lark\Exceptions\LarkInvalidSchemeException;
+use Cassarco\Lark\Exceptions\LarkNoSchemesDefinedException;
+use Cassarco\Lark\LarkConfig;
 
 it('throws an exception when no schemes are found', function () {
     config()->set('lark', []);
