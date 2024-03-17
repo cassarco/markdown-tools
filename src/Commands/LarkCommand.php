@@ -15,7 +15,7 @@ class LarkCommand extends Command
     {
         Lark::handle();
 
-        $this->comment('Your Lark Schemes have all been process successfully.');
+        $this->comment('Your Lark Schemes have all been processed successfully.');
 
         return self::SUCCESS;
     }

@@ -31,6 +31,6 @@ beforeEach(closure: function () {
 
 it('can run the lark command', function () {
     $this->artisan('lark:process')
-        ->expectsOutput('Your Lark Schemes have all been process successfully.')
+        ->expectsOutput('Your Lark Schemes have all been processed successfully.')
         ->assertSuccessful();
 });
