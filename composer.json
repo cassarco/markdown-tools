@@ -37,8 +37,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Carlcassar\\Lark\\": "src/",
-            "Carlcassar\\Lark\\Database\\Factories\\": "database/factories/"
+            "Carlcassar\\Lark\\": "src/"
         }
     },
     "autoload-dev": {
