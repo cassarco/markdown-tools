@@ -120,7 +120,7 @@ class MarkdownFile
         ]);
 
         $environment->addExtension(new CommonMarkCoreExtension());
-        $environment->addExtension(new FrontMatterExtension());
+        $environment->addExtension(new FrontMatterExtension(new LarkFrontMatterParser()));
         $environment->addExtension(new HeadingPermalinkExtension());
         $environment->addExtension(new TableOfContentsExtension());
         $environment->addExtension(new WikiLinksExtension());
