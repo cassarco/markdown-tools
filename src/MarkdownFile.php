@@ -109,6 +109,7 @@ class MarkdownFile
     private function generateRenderedContent(): void
     {
         $environment = new Environment([
+            'wikilinks' => [],
             'heading_permalink' => [
                 'symbol' => '#',
                 'html_class' => 'no-underline mr-2 text-gray-500',
@@ -119,10 +120,10 @@ class MarkdownFile
         ]);
 
         $environment->addExtension(new CommonMarkCoreExtension());
-        $environment->addExtension(new WikiLinksExtension());
         $environment->addExtension(new FrontMatterExtension());
         $environment->addExtension(new HeadingPermalinkExtension());
         $environment->addExtension(new TableOfContentsExtension());
+        $environment->addExtension(new WikiLinksExtension());
 
         $this->content = (new MarkdownConverter($environment))->convert($this->markdown());
     }
