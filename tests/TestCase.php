@@ -9,7 +9,7 @@ use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
-    public MarkdownTools $markdown-tools;
+    public MarkdownTools $markdownTools;
 
     protected function setUp(): void
     {

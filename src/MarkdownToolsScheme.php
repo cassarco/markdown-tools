@@ -24,12 +24,12 @@ class MarkdownToolsScheme
         $this->filesystem = new Filesystem();
     }
 
-    public function withValidation(array $validation)
+    public function withValidation(array $validation): void
     {
         $this->validation = $validation;
     }
 
-    public function withHandler(Closure $handler)
+    public function withHandler(Closure $handler): void
     {
         $this->handler = $handler;
     }

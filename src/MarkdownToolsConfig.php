@@ -55,17 +55,17 @@ class MarkdownToolsConfig
     private function makeSchemes(): Collection
     {
         return collect($this->config['schemes'])->map(function ($scheme) {
-            $markdown-toolsScheme = new MarkdownToolsScheme(path: $scheme['path']);
+            $markdownToolsScheme = new MarkdownToolsScheme(path: $scheme['path']);
 
             if (array_key_exists('validation', $scheme)) {
-                $markdown-toolsScheme->withValidation($scheme['validation']);
+                $markdownToolsScheme->withValidation($scheme['validation']);
             }
 
             if (array_key_exists('handler', $scheme)) {
-                $markdown-toolsScheme->withHandler($scheme['handler']);
+                $markdownToolsScheme->withHandler($scheme['handler']);
             }
 
-            return $markdown-toolsScheme;
+            return $markdownToolsScheme;
         });
     }
 
