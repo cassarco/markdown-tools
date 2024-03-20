@@ -1,8 +1,8 @@
 <?php
 
-namespace Cassarco\Lark;
+namespace Cassarco\MarkdownTools;
 
-enum LarkFrontMatterKeyOrder
+enum MarkdownToolsFrontMatterKeyOrder
 {
     case RuleOrder;
     case None;

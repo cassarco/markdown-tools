@@ -1,12 +1,12 @@
 <?php
 
-namespace Cassarco\Lark;
+namespace Cassarco\MarkdownTools;
 
-use Cassarco\Lark\Exceptions\LarkInvalidSchemeException;
-use Cassarco\Lark\Exceptions\LarkNoSchemesDefinedException;
+use Cassarco\MarkdownTools\Exceptions\MarkdownToolsInvalidSchemeException;
+use Cassarco\MarkdownTools\Exceptions\MarkdownToolsNoSchemesDefinedException;
 use Illuminate\Support\Collection;
 
-class LarkConfig
+class MarkdownToolsConfig
 {
     private array $config;
 
@@ -17,11 +17,11 @@ class LarkConfig
     private Collection $schemes;
 
     /**
-     * @throws LarkNoSchemesDefinedException|LarkInvalidSchemeException
+     * @throws MarkdownToolsNoSchemesDefinedException|MarkdownToolsInvalidSchemeException
      */
     public function __construct()
     {
-        $this->config = config('lark');
+        $this->config = config('markdown-tools');
 
         $this->validateSchemes();
 
@@ -31,46 +31,46 @@ class LarkConfig
     /**
      * Verify that each scheme array in the config has a valid structure.
      *
-     * @throws LarkNoSchemesDefinedException
-     * @throws LarkInvalidSchemeException
+     * @throws MarkdownToolsNoSchemesDefinedException
+     * @throws MarkdownToolsInvalidSchemeException
      */
     private function validateSchemes(): void
     {
         if (empty($this->config['schemes'])) {
-            throw new LarkNoSchemesDefinedException;
+            throw new MarkdownToolsNoSchemesDefinedException;
         }
 
         foreach ($this->config['schemes'] as $scheme) {
             foreach ($this->requiredKeys as $key) {
                 if (! array_key_exists($key, $scheme)) {
-                    throw new LarkInvalidSchemeException("Every scheme must have a {$key} key");
+                    throw new MarkdownToolsInvalidSchemeException("Every scheme must have a {$key} key");
                 }
             }
         }
     }
 
     /**
-     * Generate the lark schemes from the lark configuration file.
+     * Generate the markdown-tools schemes from the markdown-tools configuration file.
      */
     private function makeSchemes(): Collection
     {
         return collect($this->config['schemes'])->map(function ($scheme) {
-            $larkScheme = new LarkScheme(path: $scheme['path']);
+            $markdown-toolsScheme = new MarkdownToolsScheme(path: $scheme['path']);
 
             if (array_key_exists('validation', $scheme)) {
-                $larkScheme->withValidation($scheme['validation']);
+                $markdown-toolsScheme->withValidation($scheme['validation']);
             }
 
             if (array_key_exists('handler', $scheme)) {
-                $larkScheme->withHandler($scheme['handler']);
+                $markdown-toolsScheme->withHandler($scheme['handler']);
             }
 
-            return $larkScheme;
+            return $markdown-toolsScheme;
         });
     }
 
     /**
-     * Get all lark schemes from the lark configuration file.
+     * Get all markdown-tools schemes from the markdown-tools configuration file.
      */
     public function schemes()
     {

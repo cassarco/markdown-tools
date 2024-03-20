@@ -1,29 +1,29 @@
 <?php
 
-namespace Cassarco\Lark\Tests;
+namespace Cassarco\MarkdownTools\Tests;
 
-use Cassarco\Lark\Lark;
-use Cassarco\Lark\LarkServiceProvider;
+use Cassarco\MarkdownTools\MarkdownTools;
+use Cassarco\MarkdownTools\MarkdownToolsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
-    public Lark $lark;
+    public MarkdownTools $markdown-tools;
 
     protected function setUp(): void
     {
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Cassarco\\Lark\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Cassarco\\MarkdownTools\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            LarkServiceProvider::class,
+            MarkdownToolsServiceProvider::class,
         ];
     }
 
@@ -32,7 +32,7 @@ class TestCase extends Orchestra
         config()->set('database.default', 'testing');
 
         /*
-        $migration = include __DIR__.'/../database/migrations/create_lark_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_markdown-tools_table.php.stub';
         $migration->up();
         */
     }

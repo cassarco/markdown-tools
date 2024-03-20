@@ -1,3 +1,3 @@
 # Changelog
 
-All notable changes to `lark` will be documented in this file.
+All notable changes to `markdown-tools` will be documented in this file.

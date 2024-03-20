@@ -1,14 +1,14 @@
 <?php
 
-namespace Cassarco\Lark;
+namespace Cassarco\MarkdownTools;
 
-use Cassarco\Lark\Exceptions\LarkValidationException;
+use Cassarco\MarkdownTools\Exceptions\MarkdownToolsValidationException;
 use Closure;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Symfony\Component\Finder\SplFileInfo;
 
-class LarkScheme
+class MarkdownToolsScheme
 {
     private Filesystem $filesystem;
 
@@ -62,15 +62,15 @@ class LarkScheme
     }
 
     /**
-     * @throws LarkValidationException
+     * @throws MarkdownToolsValidationException
      */
     private function validate(MarkdownFile $file): void
     {
-        (new LarkMarkdownFileValidator($file, $this->validation))->validate();
+        (new MarkdownToolsMarkdownFileValidator($file, $this->validation))->validate();
     }
 
     /**
-     * @throws LarkValidationException
+     * @throws MarkdownToolsValidationException
      */
     public function handle(): void
     {

@@ -1,16 +1,16 @@
 <?php
 
-use Cassarco\Lark\LarkFrontMatterKeyOrder;
-use Cassarco\Lark\MarkdownFile;
+use Cassarco\MarkdownTools\MarkdownToolsFrontMatterKeyOrder;
+use Cassarco\MarkdownTools\MarkdownFile;
 
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Lark Schemes
+    | MarkdownTools Schemes
     |--------------------------------------------------------------------------
     |
-    | Here you may configure as many lark "schemes disks" as you wish. Each
+    | Here you may configure as many markdown-tools "schemes disks" as you wish. Each
     | scheme will contain the configuration for a folder containing that
     | contains markdown files or alternatively a single markdown file.
     |
@@ -34,7 +34,7 @@ return [
                 ],
 
                 // Specify validation for the order of front-matter properties.
-                'order' => LarkFrontMatterKeyOrder::None,
+                'order' => MarkdownToolsFrontMatterKeyOrder::None,
             ],
 
             // Define a handler for each markdown file. You will have access to file:

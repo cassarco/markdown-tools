@@ -1,21 +1,21 @@
 <?php
 
-namespace Cassarco\Lark\Commands;
+namespace Cassarco\MarkdownTools\Commands;
 
-use Cassarco\Lark\Facades\Lark;
+use Cassarco\MarkdownTools\Facades\MarkdownTools;
 use Illuminate\Console\Command;
 
-class LarkCommand extends Command
+class MarkdownToolsCommand extends Command
 {
-    public $signature = 'lark:process';
+    public $signature = 'markdown-tools:process';
 
-    public $description = 'Process schemes in your lark config.';
+    public $description = 'Process schemes in your markdown-tools config.';
 
     public function handle(): int
     {
-        Lark::handle();
+        MarkdownTools::handle();
 
-        $this->comment('Your Lark Schemes have all been processed successfully.');
+        $this->comment('Your MarkdownTools Schemes have all been processed successfully.');
 
         return self::SUCCESS;
     }

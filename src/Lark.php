@@ -1,22 +1,22 @@
 <?php
 
-namespace Cassarco\Lark;
+namespace Cassarco\MarkdownTools;
 
 use Illuminate\Support\Collection;
 
-class Lark
+class MarkdownTools
 {
-    protected LarkConfig $config;
+    protected MarkdownToolsConfig $config;
 
     public function __construct()
     {
-        $this->config = new LarkConfig();
+        $this->config = new MarkdownToolsConfig();
     }
 
     public function handle(): void
     {
         $this->config->schemes()
-            ->each(fn (LarkScheme $scheme) => $scheme->handle());
+            ->each(fn (MarkdownToolsScheme $scheme) => $scheme->handle());
     }
 
     public function schemes(): Collection

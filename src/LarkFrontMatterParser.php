@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cassarco\Lark;
+namespace Cassarco\MarkdownTools;
 
 use League\CommonMark\Exception\MissingDependencyException;
 use League\CommonMark\Extension\FrontMatter\Data\FrontMatterDataParserInterface;
@@ -10,7 +10,7 @@ use League\CommonMark\Extension\FrontMatter\Exception\InvalidFrontMatterExceptio
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
-class LarkFrontMatterParser implements FrontMatterDataParserInterface
+class MarkdownToolsFrontMatterParser implements FrontMatterDataParserInterface
 {
     public function parse(string $frontMatter)
     {

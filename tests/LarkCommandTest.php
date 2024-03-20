@@ -1,11 +1,11 @@
 <?php
 
-use Cassarco\Lark\MarkdownFile;
+use Cassarco\MarkdownTools\MarkdownFile;
 
 use function Pest\testDirectory;
 
 beforeEach(closure: function () {
-    config()->set('lark.schemes', [
+    config()->set('markdown-tools.schemes', [
         'articles' => [
             'path' => testDirectory('markdown/articles'),
             'rules' => [
@@ -29,8 +29,8 @@ beforeEach(closure: function () {
     ]);
 });
 
-it('can run the lark command', function () {
-    $this->artisan('lark:process')
-        ->expectsOutput('Your Lark Schemes have all been processed successfully.')
+it('can run the markdown-tools command', function () {
+    $this->artisan('markdown-tools:process')
+        ->expectsOutput('Your MarkdownTools Schemes have all been processed successfully.')
         ->assertSuccessful();
 });

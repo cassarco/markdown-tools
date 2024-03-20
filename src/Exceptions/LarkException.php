@@ -1,9 +1,9 @@
 <?php
 
-namespace Cassarco\Lark\Exceptions;
+namespace Cassarco\MarkdownTools\Exceptions;
 
 use Exception;
 
-class LarkException extends Exception
+class MarkdownToolsException extends Exception
 {
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cassarco\Lark;
+namespace Cassarco\MarkdownTools;
 
 use Cassarco\LeagueCommonmarkWikilinks\WikilinksExtension;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
@@ -120,7 +120,7 @@ class MarkdownFile
         ]);
 
         $environment->addExtension(new CommonMarkCoreExtension());
-        $environment->addExtension(new FrontMatterExtension(new LarkFrontMatterParser()));
+        $environment->addExtension(new FrontMatterExtension(new MarkdownToolsFrontMatterParser()));
         $environment->addExtension(new HeadingPermalinkExtension());
         $environment->addExtension(new TableOfContentsExtension());
         $environment->addExtension(new WikiLinksExtension());

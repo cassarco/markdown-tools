@@ -1,8 +1,8 @@
 <?php
 
-namespace Cassarco\Lark\Exceptions;
+namespace Cassarco\MarkdownTools\Exceptions;
 
-class LarkFrontMatterPropertyNotPresentException extends LarkValidationException
+class MarkdownToolsFrontMatterPropertyNotPresentException extends MarkdownToolsValidationException
 {
     public function __toString()
     {

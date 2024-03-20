@@ -1,11 +1,11 @@
 <?php
 
-namespace Cassarco\Lark\Exceptions;
+namespace Cassarco\MarkdownTools\Exceptions;
 
-class LarkNoSchemesDefinedException extends LarkException
+class MarkdownToolsNoSchemesDefinedException extends MarkdownToolsException
 {
     public function __toString(): string
     {
-        return __CLASS__.": {'You must declare at least one import configuration in config/lark.php'}\n";
+        return __CLASS__.": {'You must declare at least one import configuration in config/markdown-tools.php'}\n";
     }
 }

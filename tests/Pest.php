@@ -1,5 +1,5 @@
 <?php
 
-use Cassarco\Lark\Tests\TestCase;
+use Cassarco\MarkdownTools\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

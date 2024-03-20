@@ -1,13 +1,13 @@
 {
-    "name": "cassarco/lark",
+    "name": "cassarco/markdown-tools",
     "description": "A package for Laravel that let's you import markdown files into Laravel models.",
     "keywords": [
         "cassarco",
         "laravel",
-        "lark",
+        "markdown-tools",
         "markdown"
     ],
-    "homepage": "https://github.com/cassarco/lark",
+    "homepage": "https://github.com/cassarco/markdown-tools",
     "license": "MIT",
     "authors": [
         {
@@ -38,18 +38,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Cassarco\\Lark\\": "src/"
+            "Cassarco\\MarkdownTools\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Cassarco\\Lark\\Tests\\": "tests/",
+            "Cassarco\\MarkdownTools\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
     "scripts": {
         "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-lark --ansi",
+        "clear": "@php vendor/bin/testbench package:purge-markdown-tools --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
             "@composer run prepare",
@@ -75,10 +75,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Cassarco\\Lark\\LarkServiceProvider"
+                "Cassarco\\MarkdownTools\\MarkdownToolsServiceProvider"
             ],
             "aliases": {
-                "Lark": "Cassarco\\Lark\\Facades\\Lark"
+                "MarkdownTools": "Cassarco\\MarkdownTools\\Facades\\MarkdownTools"
             }
         }
     },

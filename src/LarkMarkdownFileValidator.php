@@ -1,28 +1,28 @@
 <?php
 
-namespace Cassarco\Lark;
+namespace Cassarco\MarkdownTools;
 
-use Cassarco\Lark\Exceptions\LarkValidationException;
+use Cassarco\MarkdownTools\Exceptions\MarkdownToolsValidationException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
-class LarkMarkdownFileValidator
+class MarkdownToolsMarkdownFileValidator
 {
     private MarkdownFile $file;
 
     private array $rules;
 
-    private LarkFrontMatterKeyOrder $order;
+    private MarkdownToolsFrontMatterKeyOrder $order;
 
     public function __construct(MarkdownFile $file, array $validation)
     {
         $this->file = $file;
         $this->rules = $validation['rules'] ?? [];
-        $this->order = $validation['order'] ?? LarkFrontMatterKeyOrder::None;
+        $this->order = $validation['order'] ?? MarkdownToolsFrontMatterKeyOrder::None;
     }
 
     /**
-     * @throws LarkValidationException
+     * @throws MarkdownToolsValidationException
      */
     public function validate(): void
     {
@@ -31,21 +31,21 @@ class LarkMarkdownFileValidator
     }
 
     /**
-     * @throws LarkValidationException
+     * @throws MarkdownToolsValidationException
      */
     private function validateKeys(): void
     {
         $validator = Validator::make($this->file->frontMatter(), $this->rules);
 
         if ($validator->fails()) {
-            throw new LarkValidationException(
+            throw new MarkdownToolsValidationException(
                 "{$this->file->filename()}: ".(new ValidationException($validator))->getMessage()
             );
         }
     }
 
     /**
-     * @throws LarkValidationException
+     * @throws MarkdownToolsValidationException
      */
     private function validateOrder(): void
     {
@@ -53,9 +53,9 @@ class LarkMarkdownFileValidator
             return;
         }
 
-        if ($this->order == LarkFrontMatterKeyOrder::RuleOrder) {
+        if ($this->order == MarkdownToolsFrontMatterKeyOrder::RuleOrder) {
             if (array_keys($this->file->frontMatter()) !== array_keys($this->rules)) {
-                throw new LarkValidationException(
+                throw new MarkdownToolsValidationException(
                     "{$this->file->filename()}: Keys are not in the correct order: ".implode(', ',
                         $this->rules)
                 );

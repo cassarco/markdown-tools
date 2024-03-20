@@ -1,30 +1,30 @@
 <?php
 
-use Cassarco\Lark\Exceptions\LarkValidationException;
-use Cassarco\Lark\LarkFrontMatterKeyOrder;
-use Cassarco\Lark\LarkMarkdownFileValidator;
-use Cassarco\Lark\MarkdownFile;
+use Cassarco\MarkdownTools\Exceptions\MarkdownToolsValidationException;
+use Cassarco\MarkdownTools\MarkdownToolsFrontMatterKeyOrder;
+use Cassarco\MarkdownTools\MarkdownToolsMarkdownFileValidator;
+use Cassarco\MarkdownTools\MarkdownFile;
 
 use function Pest\testDirectory;
 
-it('can validate front-matter keys with laravel validator', /* @throws LarkValidationException */ function () {
+it('can validate front-matter keys with laravel validator', /* @throws MarkdownToolsValidationException */ function () {
     $file = new MarkdownFile('hello-world.md', testDirectory('markdown/hello-world.md'));
 
-    (new LarkMarkdownFileValidator($file, [
+    (new MarkdownToolsMarkdownFileValidator($file, [
         'rules' => [
             'title' => 'required',
         ],
     ]))->validate();
-})->throws(LarkValidationException::class, 'hello-world.md: The title field is required.');
+})->throws(MarkdownToolsValidationException::class, 'hello-world.md: The title field is required.');
 
-it('can validate that the front-matter keys follow the validation rules order', /* @throws LarkValidationException */ function () {
+it('can validate that the front-matter keys follow the validation rules order', /* @throws MarkdownToolsValidationException */ function () {
     $file = new MarkdownFile('front-matter.md', testDirectory('markdown/front-matter.md'));
 
-    (new LarkMarkdownFileValidator($file, [
+    (new MarkdownToolsMarkdownFileValidator($file, [
         'rules' => [
             'tags',
             'title',
         ],
-        'order' => LarkFrontMatterKeyOrder::RuleOrder,
+        'order' => MarkdownToolsFrontMatterKeyOrder::RuleOrder,
     ]))->validate();
-})->throws(LarkValidationException::class, 'front-matter.md: Keys are not in the correct order: tags, title');
+})->throws(MarkdownToolsValidationException::class, 'front-matter.md: Keys are not in the correct order: tags, title');

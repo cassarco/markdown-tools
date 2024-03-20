@@ -1,12 +1,12 @@
 <?php
 
-use Cassarco\Lark\LarkScheme;
+use Cassarco\MarkdownTools\MarkdownToolsScheme;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 use function Pest\testDirectory;
 
 beforeEach(function () {
-    $this->scheme = new LarkScheme(testDirectory('markdown')); /* @phpstan-ignore-line */
+    $this->scheme = new MarkdownToolsScheme(testDirectory('markdown')); /* @phpstan-ignore-line */
 });
 
 it('can get the pathname for a file', function () {

@@ -1,7 +1,7 @@
 <?php
 
-namespace Cassarco\Lark\Exceptions;
+namespace Cassarco\MarkdownTools\Exceptions;
 
-class LarkValidationException extends LarkException
+class MarkdownToolsValidationException extends MarkdownToolsException
 {
 }

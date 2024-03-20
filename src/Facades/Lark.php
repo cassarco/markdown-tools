@@ -1,16 +1,16 @@
 <?php
 
-namespace Cassarco\Lark\Facades;
+namespace Cassarco\MarkdownTools\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Cassarco\Lark\Lark
+ * @see \Cassarco\MarkdownTools\MarkdownTools
  */
-class Lark extends Facade
+class MarkdownTools extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Cassarco\Lark\Lark::class;
+        return \Cassarco\MarkdownTools\MarkdownTools::class;
     }
 }

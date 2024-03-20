@@ -1,12 +1,12 @@
 <?php
 
-namespace Cassarco\Lark;
+namespace Cassarco\MarkdownTools;
 
-use Cassarco\Lark\Commands\LarkCommand;
+use Cassarco\MarkdownTools\Commands\MarkdownToolsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class LarkServiceProvider extends PackageServiceProvider
+class MarkdownToolsServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,8 +16,8 @@ class LarkServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('lark')
+            ->name('markdown-tools')
             ->hasConfigFile()
-            ->hasCommand(LarkCommand::class);
+            ->hasCommand(MarkdownToolsCommand::class);
     }
 }
