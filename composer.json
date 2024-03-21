@@ -18,8 +18,7 @@
     ],
     "require": {
         "php": "^8.3",
-        "cassarco/league-commonmark-wikilinks": "dev-main",
-        "illuminate/contracts": "^10.0",
+        "cassarco/league-commonmark-wikilinks": "^1.0",
         "spatie/laravel-package-tools": "^1.14.0",
         "symfony/dom-crawler": "^7.0"
     },
@@ -82,15 +81,6 @@
             }
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../league-commonmark-wikilinks",
-            "options": {
-                "symlink": true
-            }
-        }
-    ]
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
