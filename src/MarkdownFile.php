@@ -3,8 +3,8 @@
 namespace Cassarco\MarkdownTools;
 
 use Cassarco\LeagueCommonmarkWikilinks\WikilinksExtension;
+use File;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Filesystem\Filesystem;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Exception\CommonMarkException;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
@@ -14,28 +14,26 @@ use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
 use League\CommonMark\MarkdownConverter;
 use League\CommonMark\Output\RenderedContentInterface;
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\Finder\SplFileInfo;
 
 class MarkdownFile
 {
-    private string $filename;
+    public string $filename;
 
     private string $pathname;
 
-    private Filesystem $filesystem;
-
     private RenderedContentInterface $content;
+
+    private Scheme $scheme;
 
     /**
      * @throws FileNotFoundException
      * @throws CommonMarkException
      */
-    final public function __construct(string $filename, string $pathname)
+    final public function __construct(string $filename, string $pathname, Scheme $scheme)
     {
         $this->filename = $filename;
         $this->pathname = $pathname;
-
-        $this->filesystem = new Filesystem();
+        $this->scheme = $scheme;
 
         $this->generateRenderedContent();
     }
@@ -44,27 +42,31 @@ class MarkdownFile
      * @throws FileNotFoundException
      * @throws CommonMarkException
      */
-    public static function from(SplFileInfo $splFileInfo): static
+    private function generateRenderedContent(): void
     {
-        return new static($splFileInfo->getFilename(), $splFileInfo->getPathname());
+        $environment = new Environment([
+            'wikilinks' => [],
+            'heading_permalink' => [
+                'symbol' => '#',
+                'html_class' => 'no-underline mr-2 text-gray-500',
+                'aria_hidden' => false,
+                'id_prefix' => '',
+                'fragment_prefix' => '',
+            ],
+        ]);
+
+        $environment->addExtension(new CommonMarkCoreExtension());
+        $environment->addExtension(new FrontMatterExtension(new FrontMatterParser()));
+        $environment->addExtension(new HeadingPermalinkExtension());
+        $environment->addExtension(new TableOfContentsExtension());
+        $environment->addExtension(new WikiLinksExtension());
+
+        $this->content = (new MarkdownConverter($environment))->convert($this->markdown());
     }
 
-    public function pathname(): string
-    {
-        return $this->pathname;
-    }
-
-    public function filename(): string
-    {
-        return $this->filename;
-    }
-
-    /**
-     * @throws FileNotFoundException
-     */
     public function markdown(): string
     {
-        return $this->filesystem->get($this->pathname());
+        return File::get($this->pathname);
     }
 
     public function html(): string
@@ -95,36 +97,26 @@ class MarkdownFile
         $ulNodes = $crawler->filter('ul.table-of-contents');
 
         // TODO: Add a test for this code.
-        if($ulNodes->first()->count()) {
+        if ($ulNodes->first()->count()) {
             return $ulNodes->first()->outerHtml();
         } else {
             return '';
         }
     }
 
-    /**
-     * @throws FileNotFoundException
-     * @throws CommonMarkException
-     */
-    private function generateRenderedContent(): void
+    public function process(): void
     {
-        $environment = new Environment([
-            'wikilinks' => [],
-            'heading_permalink' => [
-                'symbol' => '#',
-                'html_class' => 'no-underline mr-2 text-gray-500',
-                'aria_hidden' => false,
-                'id_prefix' => '',
-                'fragment_prefix' => '',
-            ],
-        ]);
+        $this->validate();
+        $this->handle();
+    }
 
-        $environment->addExtension(new CommonMarkCoreExtension());
-        $environment->addExtension(new FrontMatterExtension(new MarkdownToolsFrontMatterParser()));
-        $environment->addExtension(new HeadingPermalinkExtension());
-        $environment->addExtension(new TableOfContentsExtension());
-        $environment->addExtension(new WikiLinksExtension());
+    private function validate()
+    {
+        (new MarkdownFileValidator($this, $this->scheme->config))->validate();
+    }
 
-        $this->content = (new MarkdownConverter($environment))->convert($this->markdown());
+    private function handle(): void
+    {
+        $this->scheme->config->handler()($this);
     }
 }

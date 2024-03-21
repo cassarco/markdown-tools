@@ -2,25 +2,59 @@
 
 namespace Cassarco\MarkdownTools;
 
-use Illuminate\Support\Collection;
+use Cassarco\MarkdownTools\Exceptions\InvalidSchemeException;
+use Cassarco\MarkdownTools\Exceptions\NoSchemesDefinedException;
 
 class MarkdownTools
 {
-    protected MarkdownToolsConfig $config;
+    private array $requiredKeys = [
+        'path',
+    ];
 
-    public function __construct()
+    /**
+     * @throws InvalidSchemeException
+     * @throws NoSchemesDefinedException
+     */
+    public function process(): void
     {
-        $this->config = new MarkdownToolsConfig();
+        $this->validateConfiguration();
+
+        collect(config('markdown-tools')['schemes'])
+            ->map(fn ($options) => new Scheme(new Config($options)))
+            ->each(fn ($scheme) => $scheme->process());
     }
 
-    public function handle(): void
+    /**
+     * @throws InvalidSchemeException
+     * @throws NoSchemesDefinedException
+     */
+    private function validateConfiguration(): void
     {
-        $this->config->schemes()
-            ->each(fn (MarkdownToolsScheme $scheme) => $scheme->handle());
+        $this->ensureThatWeHaveAtLeastOneScheme();
+        $this->ensureThatEachSchemeHasTheNecessaryKeys();
     }
 
-    public function schemes(): Collection
+    /**
+     * @throws NoSchemesDefinedException
+     */
+    private function ensureThatWeHaveAtLeastOneScheme(): void
     {
-        return $this->config->schemes();
+        if (empty(config('markdown-tools')['schemes'])) {
+            throw new NoSchemesDefinedException();
+        }
+    }
+
+    /**
+     * @throws InvalidSchemeException
+     */
+    private function ensureThatEachSchemeHasTheNecessaryKeys(): void
+    {
+        foreach (config('markdown-tools')['schemes'] as $scheme) {
+            foreach ($this->requiredKeys as $key) {
+                if (! array_key_exists($key, $scheme)) {
+                    throw new InvalidSchemeException("Every scheme must have a $key key");
+                }
+            }
+        }
     }
 }

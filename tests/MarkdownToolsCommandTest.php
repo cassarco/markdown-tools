@@ -31,6 +31,6 @@ beforeEach(closure: function () {
 
 it('can run the markdown-tools command', function () {
     $this->artisan('markdown-tools:process')
-        ->expectsOutput('Your MarkdownTools Schemes have all been processed successfully.')
+        ->expectsOutput('Your schemes have all been processed successfully.')
         ->assertSuccessful();
 });

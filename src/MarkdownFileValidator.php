@@ -2,23 +2,21 @@
 
 namespace Cassarco\MarkdownTools;
 
+use Cassarco\MarkdownTools\Enums\FrontMatterKeyOrder;
 use Cassarco\MarkdownTools\Exceptions\MarkdownToolsValidationException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
-class MarkdownToolsMarkdownFileValidator
+class MarkdownFileValidator
 {
     private MarkdownFile $file;
 
-    private array $rules;
+    private Config $config;
 
-    private MarkdownToolsFrontMatterKeyOrder $order;
-
-    public function __construct(MarkdownFile $file, array $validation)
+    public function __construct(MarkdownFile $file, Config $config)
     {
         $this->file = $file;
-        $this->rules = $validation['rules'] ?? [];
-        $this->order = $validation['order'] ?? MarkdownToolsFrontMatterKeyOrder::None;
+        $this->config = $config;
     }
 
     /**
@@ -35,11 +33,11 @@ class MarkdownToolsMarkdownFileValidator
      */
     private function validateKeys(): void
     {
-        $validator = Validator::make($this->file->frontMatter(), $this->rules);
+        $validator = Validator::make($this->file->frontMatter(), $this->config->frontMatterValidationRules());
 
         if ($validator->fails()) {
             throw new MarkdownToolsValidationException(
-                "{$this->file->filename()}: ".(new ValidationException($validator))->getMessage()
+                "{$this->file->filename}: ".(new ValidationException($validator))->getMessage()
             );
         }
     }
@@ -49,15 +47,15 @@ class MarkdownToolsMarkdownFileValidator
      */
     private function validateOrder(): void
     {
-        if (empty($this->order)) {
+        if (empty($this->config->frontMatterOrderValidationRule())) {
             return;
         }
 
-        if ($this->order == MarkdownToolsFrontMatterKeyOrder::RuleOrder) {
-            if (array_keys($this->file->frontMatter()) !== array_keys($this->rules)) {
+        if ($this->config->frontMatterOrderValidationRule() == FrontMatterKeyOrder::ValidationOrder) {
+            if (array_keys($this->file->frontMatter()) !== array_keys($this->config->frontMatterValidationRules())) {
                 throw new MarkdownToolsValidationException(
-                    "{$this->file->filename()}: Keys are not in the correct order: ".implode(', ',
-                        $this->rules)
+                    "{$this->file->filename}: Keys are not in the correct order: ".implode(', ',
+                        $this->config->frontMatterValidationRules())
                 );
             }
         }

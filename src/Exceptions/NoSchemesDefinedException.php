@@ -2,7 +2,7 @@
 
 namespace Cassarco\MarkdownTools\Exceptions;
 
-class MarkdownToolsNoSchemesDefinedException extends MarkdownToolsException
+class NoSchemesDefinedException extends MarkdownToolsException
 {
     public function __toString(): string
     {

@@ -10,7 +10,7 @@ use League\CommonMark\Extension\FrontMatter\Exception\InvalidFrontMatterExceptio
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
-class MarkdownToolsFrontMatterParser implements FrontMatterDataParserInterface
+class FrontMatterParser implements FrontMatterDataParserInterface
 {
     public function parse(string $frontMatter)
     {

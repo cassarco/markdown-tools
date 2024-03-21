@@ -13,9 +13,9 @@ class MarkdownToolsCommand extends Command
 
     public function handle(): int
     {
-        MarkdownTools::handle();
+        MarkdownTools::process();
 
-        $this->comment('Your MarkdownTools Schemes have all been processed successfully.');
+        $this->comment('Your schemes have all been processed successfully.');
 
         return self::SUCCESS;
     }
