@@ -1,6 +1,5 @@
 <?php
 
-use Cassarco\MarkdownTools\Enums\FrontMatterKeyOrder;
 use Cassarco\MarkdownTools\MarkdownFile;
 
 return [
@@ -27,12 +26,9 @@ return [
             'path' => 'resources/markdown',
 
             // Specify the validation rules for front-matter properties.
-            'validate-front-matter' => [
-                'title' => 'required',
+            'rules' => [
+                // 'title' => 'required',
             ],
-
-            // Specify validation for the order of front-matter properties.
-            'sort-front-matter' => FrontMatterKeyOrder::None,
 
             // Define a handler for each markdown file. You will have access to file:
             //  - front-matter values

@@ -2,62 +2,34 @@
 
 namespace Cassarco\MarkdownTools;
 
-use Cassarco\MarkdownTools\Enums\FrontMatterKeyOrder;
 use Cassarco\MarkdownTools\Exceptions\MarkdownToolsValidationException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class MarkdownFileValidator
 {
-    private MarkdownFile $file;
+    private array $rules;
 
-    private Config $config;
-
-    public function __construct(MarkdownFile $file, Config $config)
+    public function withRules(array $rules): static
     {
-        $this->file = $file;
-        $this->config = $config;
+        $this->rules = $rules;
+
+        return $this;
     }
 
     /**
      * @throws MarkdownToolsValidationException
      */
-    public function validate(): void
+    public function validate(MarkdownFile $file): void
     {
-        $this->validateKeys();
-        $this->validateOrder();
-    }
+        $validator = Validator::make($file->frontMatter(), $this->rules);
 
-    /**
-     * @throws MarkdownToolsValidationException
-     */
-    private function validateKeys(): void
-    {
-        $validator = Validator::make($this->file->frontMatter(), $this->config->frontMatterValidationRules());
+        $message = app(ValidationException::class, compact('validator'))->getMessage();
 
         if ($validator->fails()) {
             throw new MarkdownToolsValidationException(
-                "{$this->file->filename}: ".(new ValidationException($validator))->getMessage()
+                "$file->filename: $message"
             );
-        }
-    }
-
-    /**
-     * @throws MarkdownToolsValidationException
-     */
-    private function validateOrder(): void
-    {
-        if (empty($this->config->frontMatterOrderValidationRule())) {
-            return;
-        }
-
-        if ($this->config->frontMatterOrderValidationRule() == FrontMatterKeyOrder::ValidationOrder) {
-            if (array_keys($this->file->frontMatter()) !== array_keys($this->config->frontMatterValidationRules())) {
-                throw new MarkdownToolsValidationException(
-                    "{$this->file->filename}: Keys are not in the correct order: ".implode(', ',
-                        $this->config->frontMatterValidationRules())
-                );
-            }
         }
     }
 }

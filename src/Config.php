@@ -16,18 +16,13 @@ class Config
         return $this->options['path'];
     }
 
+    public function rules()
+    {
+        return $this->options['rules'];
+    }
+
     public function handler()
     {
         return $this->options['handler'];
-    }
-
-    public function frontMatterValidationRules()
-    {
-        return $this->options['validate-front-matter'];
-    }
-
-    public function frontMatterOrderValidationRule()
-    {
-        return $this->options['sort-front-matter'];
     }
 }

@@ -3,8 +3,8 @@
 namespace Cassarco\MarkdownTools;
 
 use Cassarco\LeagueCommonmarkWikilinks\WikilinksExtension;
+use Cassarco\MarkdownTools\Exceptions\MarkdownToolsValidationException;
 use File;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Exception\CommonMarkException;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
@@ -26,7 +26,6 @@ class MarkdownFile
     private Scheme $scheme;
 
     /**
-     * @throws FileNotFoundException
      * @throws CommonMarkException
      */
     final public function __construct(string $filename, string $pathname, Scheme $scheme)
@@ -39,7 +38,6 @@ class MarkdownFile
     }
 
     /**
-     * @throws FileNotFoundException
      * @throws CommonMarkException
      */
     private function generateRenderedContent(): void
@@ -104,15 +102,23 @@ class MarkdownFile
         }
     }
 
+    /**
+     * @throws MarkdownToolsValidationException
+     */
     public function process(): void
     {
         $this->validate();
         $this->handle();
     }
 
-    private function validate()
+    /**
+     * @throws MarkdownToolsValidationException
+     */
+    private function validate(): void
     {
-        (new MarkdownFileValidator($this, $this->scheme->config))->validate();
+        app(MarkdownFileValidator::class)
+            ->withRules($this->scheme->config->rules())
+            ->validate($this);
     }
 
     private function handle(): void

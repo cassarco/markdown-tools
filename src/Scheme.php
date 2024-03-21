@@ -72,6 +72,6 @@ class Scheme
      */
     private function validate(MarkdownFile $file): void
     {
-        (new MarkdownFileValidator($file, $this->config->frontMatterValidationRules()))->validate();
+        (new MarkdownFileValidator($file, $this->config->rules()))->validate();
     }
 }
