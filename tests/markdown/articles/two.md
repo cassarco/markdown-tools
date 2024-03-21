@@ -1,3 +1,3 @@
 ---
-title: two.md
+title: Two
 ---

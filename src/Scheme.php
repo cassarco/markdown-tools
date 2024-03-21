@@ -17,13 +17,11 @@ class Scheme
     }
 
     /**
-     * Get a single markdown file by its filename.
+     * @throws MarkdownToolsValidationException
      */
-    public function markdownFileCalled(string $filename): MarkdownFile
+    public function process(): void
     {
-        return $this->markdownFiles()->firstOrFail(function (MarkdownFile $file) use ($filename) {
-            return $file->filename == $filename;
-        });
+        $this->markdownFiles()->each(fn (MarkdownFile $file) => $file->process());
     }
 
     public function markdownFiles(): Collection
@@ -31,11 +29,7 @@ class Scheme
         $files = $this->loadFiles();
 
         return collect($files)->map(function (SplFileInfo $splFileInfo) {
-            return new MarkdownFile(
-                $splFileInfo->getFilename(),
-                $splFileInfo->getPathname(),
-                $this
-            );
+            return new MarkdownFile($splFileInfo->getPathname(), $this);
         });
     }
 
@@ -54,24 +48,5 @@ class Scheme
         return array_filter($files, function (SplFileInfo $file) use ($pathInfo) {
             return $file->getFilename() == $pathInfo['basename'];
         });
-    }
-
-    /**
-     * @throws MarkdownToolsValidationException
-     */
-    public function process(): void
-    {
-        $this->markdownFiles()->each(fn (MarkdownFile $file) => $file->process());
-
-        //            ->each(fn (MarkdownFile $file) => $this->validate($file))
-        //            ->each(fn (MarkdownFile $file) => ($this->config->handler())($file));
-    }
-
-    /**
-     * @throws MarkdownToolsValidationException
-     */
-    private function validate(MarkdownFile $file): void
-    {
-        (new MarkdownFileValidator($file, $this->config->rules()))->validate();
     }
 }

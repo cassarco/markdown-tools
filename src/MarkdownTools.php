@@ -7,10 +7,6 @@ use Cassarco\MarkdownTools\Exceptions\NoSchemesDefinedException;
 
 class MarkdownTools
 {
-    private array $requiredKeys = [
-        'path',
-    ];
-
     /**
      * @throws InvalidSchemeException
      * @throws NoSchemesDefinedException
@@ -31,7 +27,7 @@ class MarkdownTools
     private function validateConfiguration(): void
     {
         $this->ensureThatWeHaveAtLeastOneScheme();
-        $this->ensureThatEachSchemeHasTheNecessaryKeys();
+        $this->ensureThatEachSchemeHasAPath();
     }
 
     /**
@@ -47,13 +43,15 @@ class MarkdownTools
     /**
      * @throws InvalidSchemeException
      */
-    private function ensureThatEachSchemeHasTheNecessaryKeys(): void
+    private function ensureThatEachSchemeHasAPath(): void
     {
-        foreach (config('markdown-tools')['schemes'] as $scheme) {
-            foreach ($this->requiredKeys as $key) {
-                if (! array_key_exists($key, $scheme)) {
-                    throw new InvalidSchemeException("Every scheme must have a $key key");
-                }
+        foreach (config('markdown-tools')['schemes'] as $name => $scheme) {
+            if (! array_key_exists('path', $scheme)) {
+                throw new InvalidSchemeException("Scheme '$name' must have a path");
+            }
+
+            if (empty($scheme['path'])) {
+                throw new InvalidSchemeException("The path in $name must not be empty");
             }
         }
     }

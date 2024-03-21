@@ -1,46 +1,47 @@
 <?php
 
+use Cassarco\MarkdownTools\Config;
+use Cassarco\MarkdownTools\Exceptions\MarkdownToolsValidationException;
+use Cassarco\MarkdownTools\MarkdownFile;
 use Cassarco\MarkdownTools\Scheme;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 use function Pest\testDirectory;
 
-beforeEach(function () {
-    $this->scheme = new Scheme(testDirectory('markdown')); /* @phpstan-ignore-line */
-});
+it('can get the markdown content for a file', function () {
+    $scheme = new Scheme(new Config([
+        'path' => testDirectory('markdown/hello-world.md'),
+    ]));
 
-it('can get the pathname for a file', function () {
-    $markdownFile = $this->scheme->markdownFileCalled('hello-world.md'); /* @phpstan-ignore-line */
+    /** @var MarkdownFile $file */
+    $file = $scheme->markdownFiles()->first();
 
-    expect($markdownFile->pathname())->toBe('tests/markdown/hello-world.md');
-});
-
-it('can get the filename for a file', function () {
-    $markdownFile = $this->scheme->markdownFileCalled('hello-world.md'); /* @phpstan-ignore-line */
-
-    expect($markdownFile->filename())->toBe('hello-world.md');
-});
-
-it('can get the markdown content for a file', /* @throws FileNotFoundException */ function () {
-    $markdownFile = $this->scheme->markdownFileCalled('hello-world.md'); /* @phpstan-ignore-line */
-
-    expect($markdownFile->markdown())->toEqual(
+    expect($file->markdown())->toEqual(
         file_get_contents('tests/markdown/hello-world.md')
     );
 });
 
 it('can get the html content for a file', function () {
-    $markdownFile = $this->scheme->markdownFileCalled('hello-world.md'); /* @phpstan-ignore-line */
+    $scheme = new Scheme(new Config([
+        'path' => testDirectory('markdown/hello-world.md'),
+    ]));
 
-    expect($markdownFile->html())->toEqual(
+    /** @var MarkdownFile $file */
+    $file = $scheme->markdownFiles()->first();
+
+    expect($file->html())->toEqual(
         '<p>Hello World!</p>'
     );
 });
 
 it('can get the front-matter data for a file', function () {
-    $markdownFile = $this->scheme->markdownFileCalled('front-matter.md'); /* @phpstan-ignore-line */
+    $scheme = new Scheme(new Config([
+        'path' => testDirectory('markdown/front-matter.md'),
+    ]));
 
-    expect($markdownFile->frontMatter())->toEqual([
+    /** @var MarkdownFile $file */
+    $file = $scheme->markdownFiles()->first();
+
+    expect($file->frontMatter())->toEqual([
         'title' => 'Some Title',
         'tags' => [
             0 => 'one',
@@ -51,7 +52,9 @@ it('can get the front-matter data for a file', function () {
 });
 
 it('can return the table of contents for a markdown file', function () {
-    $markdownFile = $this->scheme->markdownFileCalled('toc.md'); /* @phpstan-ignore-line */
+    $scheme = new Scheme(new Config([
+        'path' => testDirectory('markdown/toc.md'),
+    ]));
 
     $expectedToc = <<<'HTML'
 <ul class="table-of-contents">
@@ -69,5 +72,63 @@ it('can return the table of contents for a markdown file', function () {
 </ul>
 HTML;
 
-    expect($markdownFile->toc())->toBe($expectedToc);
+    /** @var MarkdownFile $file */
+    $file = $scheme->markdownFiles()->first();
+
+    expect($file->toc())->toBe($expectedToc);
 });
+
+it('can return the html with embedded table of contents for a markdown file', function () {
+    $scheme = new Scheme(new Config([
+        'path' => testDirectory('markdown/toc.md'),
+    ]));
+
+    $expectedToc = <<<'HTML'
+<ul class="table-of-contents">
+<li>
+<a href="#title">Title</a>
+<ul>
+<li>
+<a href="#heading">Heading</a>
+</li>
+<li>
+<a href="#subheading">SubHeading</a>
+</li>
+</ul>
+</li>
+</ul>
+<h1><a id="title" href="#title" class="no-underline mr-2 text-gray-500" title="Permalink">#</a>Title</h1>
+<p>Some text.</p>
+<h2><a id="heading" href="#heading" class="no-underline mr-2 text-gray-500" title="Permalink">#</a>Heading</h2>
+<p>Some text.</p>
+<h2><a id="subheading" href="#subheading" class="no-underline mr-2 text-gray-500" title="Permalink">#</a>SubHeading</h2>
+<p>Some text.</p>
+HTML;
+
+    /** @var MarkdownFile $file */
+    $file = $scheme->markdownFiles()->first();
+
+    expect($file->htmlWithToc())->toBe($expectedToc);
+});
+
+it('can returns an empty string for the table of contents of a markdown file with no table of contents', function () {
+    $scheme = new Scheme(new Config([
+        'path' => testDirectory('markdown/hello-world.md'),
+    ]));
+
+    /** @var MarkdownFile $file */
+    $file = $scheme->markdownFiles()->first();
+
+    expect($file->toc())->toBe('');
+});
+
+it('can process itself', /** @throws MarkdownToolsValidationException */ function () {
+    $scheme = new Scheme(new Config([
+        'path' => testDirectory('markdown/hello-world.md'),
+    ]));
+
+    /** @var MarkdownFile $file */
+    $file = $scheme->markdownFiles()->first();
+
+    $file->process();
+})->throwsNoExceptions();

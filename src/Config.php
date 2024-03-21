@@ -18,11 +18,13 @@ class Config
 
     public function rules()
     {
-        return $this->options['rules'];
+        return $this->options['rules'] ?? [];
     }
 
     public function handler()
     {
-        return $this->options['handler'];
+        return $this->options['handler'] ?? function () {
+            // Do Nothing.
+        };
     }
 }

@@ -1,22 +1,22 @@
 <?php
 
+use Cassarco\MarkdownTools\Config;
+use Cassarco\MarkdownTools\Exceptions\MarkdownToolsValidationException;
 use Cassarco\MarkdownTools\MarkdownFile;
 use Cassarco\MarkdownTools\Scheme;
 use Illuminate\Support\Collection;
 
 use function Pest\testDirectory;
 
-it('can be initialised with a path', function () {
-    $scheme = new Scheme(
-        path: testDirectory('markdown')
-    );
+it('can be initialised', function () {
+    $scheme = new Scheme(new Config([]));
 
     expect($scheme)->toBeInstanceOf(Scheme::class);
 });
 
 it('can get a collection of markdown files for the scheme', function () {
     $scheme = new Scheme(
-        path: testDirectory('markdown/articles'),
+        new Config(['path' => testDirectory('markdown/articles')])
     );
 
     expect($scheme)->toBeInstanceOf(Scheme::class)
@@ -27,7 +27,7 @@ it('can get a collection of markdown files for the scheme', function () {
 
 it('can get one file for the scheme', function () {
     $scheme = new Scheme(
-        path: testDirectory('markdown/hello-world.md'),
+        new Config(['path' => testDirectory('markdown/hello-world.md')])
     );
 
     expect($scheme)->toBeInstanceOf(Scheme::class)
@@ -35,3 +35,11 @@ it('can get one file for the scheme', function () {
         ->and($files->first())->toBeInstanceOf(MarkdownFile::class)
         ->and($files->count())->toBe(1);
 });
+
+it('can process the scheme', /** @throws MarkdownToolsValidationException */ function () {
+    $scheme = new Scheme(
+        new Config(['path' => testDirectory('markdown/articles')])
+    );
+
+    $scheme->process();
+})->throwsNoExceptions();

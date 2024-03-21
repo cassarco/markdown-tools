@@ -11,23 +11,7 @@ class TestCase extends Orchestra
 {
     public MarkdownTools $markdownTools;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Cassarco\\MarkdownTools\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
-    }
-
-    protected function getPackageProviders($app)
-    {
-        return [
-            MarkdownToolsServiceProvider::class,
-        ];
-    }
-
-    public function getEnvironmentSetUp($app)
+    public function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
 
@@ -35,5 +19,22 @@ class TestCase extends Orchestra
         $migration = include __DIR__.'/../database/migrations/create_markdown-tools_table.php.stub';
         $migration->up();
         */
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Factory::guessFactoryNamesUsing(
+            fn (string $modelName
+            ) => 'Cassarco\\MarkdownTools\\Database\\Factories\\'.class_basename($modelName).'Factory'
+        );
+    }
+
+    protected function getPackageProviders($app): array
+    {
+        return [
+            MarkdownToolsServiceProvider::class,
+        ];
     }
 }

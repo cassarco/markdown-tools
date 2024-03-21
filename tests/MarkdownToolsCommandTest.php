@@ -2,6 +2,7 @@
 
 use Cassarco\MarkdownTools\MarkdownFile;
 
+use function Laravel\Prompts\info;
 use function Pest\testDirectory;
 
 beforeEach(closure: function () {
@@ -22,15 +23,16 @@ beforeEach(closure: function () {
                 'deleted_at',
             ],
             'handler' => function (MarkdownFile $file) {
-                //
+                info("Processing {$file->frontMatter()['title']}");
             },
-            'sort' => 'rule-order',
         ],
     ]);
 });
 
 it('can run the markdown-tools command', function () {
     $this->artisan('markdown-tools:process')
+        ->expectsOutputToContain('Processing One')
+        ->expectsOutputToContain('Processing Two')
         ->expectsOutput('Your schemes have all been processed successfully.')
         ->assertSuccessful();
 });

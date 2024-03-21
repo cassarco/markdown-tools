@@ -28,7 +28,7 @@ class MarkdownFileValidator
 
         if ($validator->fails()) {
             throw new MarkdownToolsValidationException(
-                "$file->filename: $message"
+                "{$file->pathname()}: $message"
             );
         }
     }

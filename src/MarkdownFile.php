@@ -3,6 +3,7 @@
 namespace Cassarco\MarkdownTools;
 
 use Cassarco\LeagueCommonmarkWikilinks\WikilinksExtension;
+use Cassarco\MarkdownTools\Exceptions\MarkdownToolsConversionException;
 use Cassarco\MarkdownTools\Exceptions\MarkdownToolsValidationException;
 use File;
 use League\CommonMark\Environment\Environment;
@@ -17,8 +18,6 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class MarkdownFile
 {
-    public string $filename;
-
     private string $pathname;
 
     private RenderedContentInterface $content;
@@ -26,15 +25,18 @@ class MarkdownFile
     private Scheme $scheme;
 
     /**
-     * @throws CommonMarkException
+     * @throws MarkdownToolsConversionException
      */
-    final public function __construct(string $filename, string $pathname, Scheme $scheme)
+    final public function __construct(string $pathname, Scheme $scheme)
     {
-        $this->filename = $filename;
         $this->pathname = $pathname;
         $this->scheme = $scheme;
 
-        $this->generateRenderedContent();
+        try {
+            $this->generateRenderedContent();
+        } catch (CommonMarkException $e) {
+            throw new MarkdownToolsConversionException($e->getMessage());
+        }
     }
 
     /**
@@ -42,16 +44,7 @@ class MarkdownFile
      */
     private function generateRenderedContent(): void
     {
-        $environment = new Environment([
-            'wikilinks' => [],
-            'heading_permalink' => [
-                'symbol' => '#',
-                'html_class' => 'no-underline mr-2 text-gray-500',
-                'aria_hidden' => false,
-                'id_prefix' => '',
-                'fragment_prefix' => '',
-            ],
-        ]);
+        $environment = new Environment(config('markdown-tools.common-mark'));
 
         $environment->addExtension(new CommonMarkCoreExtension());
         $environment->addExtension(new FrontMatterExtension(new FrontMatterParser()));
@@ -65,6 +58,11 @@ class MarkdownFile
     public function markdown(): string
     {
         return File::get($this->pathname);
+    }
+
+    public function pathname(): string
+    {
+        return $this->pathname;
     }
 
     public function html(): string
@@ -94,7 +92,6 @@ class MarkdownFile
         $crawler = new Crawler($this->htmlWithToc());
         $ulNodes = $crawler->filter('ul.table-of-contents');
 
-        // TODO: Add a test for this code.
         if ($ulNodes->first()->count()) {
             return $ulNodes->first()->outerHtml();
         } else {
