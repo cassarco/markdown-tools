@@ -68,7 +68,7 @@ class MarkdownFile
     public function html(): string
     {
         $crawler = new Crawler($this->htmlWithToc());
-        $ulNodes = $crawler->filter('ul.table-of-contents');
+        $ulNodes = $crawler->filter('.table-of-contents');
 
         foreach ($ulNodes as $ulNode) {
             $ulNode->parentNode->removeChild($ulNode);
@@ -90,7 +90,7 @@ class MarkdownFile
     public function toc(): string
     {
         $crawler = new Crawler($this->htmlWithToc());
-        $ulNodes = $crawler->filter('ul.table-of-contents');
+        $ulNodes = $crawler->filter('.table-of-contents');
 
         if ($ulNodes->first()->count()) {
             return $ulNodes->first()->outerHtml();
