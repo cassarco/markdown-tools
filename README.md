@@ -209,7 +209,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
-If you've found a bug  that impacts the security of this package please send an email to security@cassar.co instead of using the issue tracker.
+If you find a bug  that impacts the security of this package please send an email to security@cassar.co instead of using the issue tracker.
 
 ## Credits
 
