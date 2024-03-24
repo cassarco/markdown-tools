@@ -167,6 +167,26 @@ $file->htmlWithToc()
 $file->pathname()
 ```
 
+In my case, I use this package to import the markdown files into my database for [https://www.carlcassar.com](https://www.carlcassar.com):
+
+```php
+Article::updateOrCreate([
+    'slug' => $file->frontMatter()['slug'] ?? Str::slug($file->frontMatter()['title']),
+], [
+    'title' => $file->frontMatter()['title'],
+    'slug' => $file->frontMatter()['slug'] ?? Str::slug($file->frontMatter()['title']),
+    'description' => $file->frontMatter()['description'],
+    'table_of_contents' => $file->toc(),
+    'content' => $file->html(),
+    'image' => $file->frontMatter()['image'],
+    'tags' => $file->frontMatter()['tags'],
+    'published_at' => Carbon::make($file->frontMatter()['published_at']),
+    'deleted_at' => Carbon::make($file->frontMatter()['deleted_at']),
+    'created_at' => Carbon::make($file->frontMatter()['created_at']),
+    'updated_at' => Carbon::make($file->frontMatter()['updated_at']),
+]);
+```
+
 ## Testing
 
 ```bash
