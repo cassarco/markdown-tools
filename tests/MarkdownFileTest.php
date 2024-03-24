@@ -48,7 +48,7 @@ it('can get the front-matter data for a file', function () {
             1 => 'two',
             2 => 'three',
         ],
-        'date' => Date::parse('2018-08-10 19:19:00')->toDateTimeImmutable()
+        'date' => Date::parse('2018-08-10 19:19:00')->toDateTimeImmutable(),
     ]);
 });
 

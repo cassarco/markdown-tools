@@ -72,7 +72,7 @@ return [
         'wikilinks' => [],
 
         'front-matter' => [
-            'yaml-parse-flags' => Yaml::PARSE_DATETIME
-        ]
+            'yaml-parse-flags' => Yaml::PARSE_DATETIME,
+        ],
     ],
 ];

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Cassarco\MarkdownTools;
 
+use Config;
 use League\CommonMark\Exception\MissingDependencyException;
 use League\CommonMark\Extension\FrontMatter\Data\FrontMatterDataParserInterface;
 use League\CommonMark\Extension\FrontMatter\Exception\InvalidFrontMatterException;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
-use Config;
 
 use function class_exists;
 
