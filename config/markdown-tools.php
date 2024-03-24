@@ -1,6 +1,7 @@
 <?php
 
 use Cassarco\MarkdownTools\MarkdownFile;
+use Symfony\Component\Yaml\Yaml;
 
 return [
 
@@ -69,5 +70,9 @@ return [
         ],
 
         'wikilinks' => [],
+
+        'front-matter' => [
+            'yaml-parse-flags' => Yaml::PARSE_DATETIME
+        ]
     ],
 ];

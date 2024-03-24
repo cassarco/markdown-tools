@@ -9,6 +9,7 @@ use League\CommonMark\Extension\FrontMatter\Data\FrontMatterDataParserInterface;
 use League\CommonMark\Extension\FrontMatter\Exception\InvalidFrontMatterException;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
+use Config;
 
 use function class_exists;
 
@@ -21,7 +22,7 @@ class FrontMatterParser implements FrontMatterDataParserInterface
         }
 
         try {
-            return Yaml::parse($frontMatter, Yaml::PARSE_DATETIME);
+            return Yaml::parse($frontMatter, Config::get('markdown-tools.common-mark.front-matter.yaml-parse-flags'));
         } catch (ParseException $ex) {
             throw InvalidFrontMatterException::wrap($ex);
         }
