@@ -125,6 +125,12 @@ return [
 ]
 ```
 
+If you are following this example exactly, don't forget to import the `info` function:
+
+```php
+use function Laravel\Prompts\info;
+```
+
 Now run the bundled command to process these schemes:
 
 ```bash
@@ -136,7 +142,7 @@ they have a title property in the markdown's front matter.
 
 ![Output](./docs/output.png)
 
-If one or more of them do not, then you will see a Laravel
+If one or more files do not pass validation, then you will see a Laravel
 Validation error.
 
 ![Validation Error](./docs/validation-error.png)
