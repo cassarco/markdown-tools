@@ -1,6 +1,6 @@
 {
     "name": "cassarco/markdown-tools",
-    "description": "A package for Laravel that let's you import markdown files into Laravel models.",
+    "description": "A package for Laravel that lets you run Laravel Validation and/or a handler function over markdown files in your application.",
     "keywords": [
         "cassarco",
         "laravel",
