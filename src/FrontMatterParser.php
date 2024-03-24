@@ -21,7 +21,6 @@ class FrontMatterParser implements FrontMatterDataParserInterface
         }
 
         try {
-            /** @psalm-suppress ReservedWord */
             return Yaml::parse($frontMatter, Yaml::PARSE_DATETIME);
         } catch (ParseException $ex) {
             throw InvalidFrontMatterException::wrap($ex);

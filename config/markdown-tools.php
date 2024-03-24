@@ -6,21 +6,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | MarkdownTools Schemes
+    | Schemes
     |--------------------------------------------------------------------------
     |
-    | Here you may configure as many markdown-tools "schemes disks" as you wish. Each
-    | scheme will contain the configuration for a folder containing that
-    | contains markdown files or alternatively a single markdown file.
-    |
-    | Visit the documentation for more information.
+    | Configure as many "schemes" as you like. Each scheme should contain a
+    | path to a single markdown file or a folder containing markdown files.
     |
     */
 
     'schemes' => [
 
         // Give each scheme a name for your own organisation.
-        'articles' => [
+        'markdown' => [
 
             // Give the path to a folder of markdown files or a single markdown file.
             'path' => 'resources/markdown',
@@ -42,13 +39,35 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | League/Commonmark Settings
+    |--------------------------------------------------------------------------
+    |
+    | Configure settings for League Commonmark and its extensions.
+    |
+    */
+
     'common-mark' => [
+
         'heading_permalink' => [
             'symbol' => '#',
-            'html_class' => 'no-underline mr-2 text-gray-500',
+            'html_class' => '',
             'aria_hidden' => false,
             'id_prefix' => '',
             'fragment_prefix' => '',
         ],
+
+        'table_of_contents' => [
+            'html_class' => 'table-of-contents',
+            'position' => 'top',
+            'style' => 'bullet',
+            'min_heading_level' => 1,
+            'max_heading_level' => 6,
+            'normalize' => 'relative',
+            'placeholder' => null,
+        ],
+
+        'wikilinks' => [],
     ],
 ];

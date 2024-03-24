@@ -97,11 +97,11 @@ it('can return the html with embedded table of contents for a markdown file', fu
 </ul>
 </li>
 </ul>
-<h1><a id="title" href="#title" class="no-underline mr-2 text-gray-500" title="Permalink">#</a>Title</h1>
+<h1><a id="title" href="#title" class="" title="Permalink">#</a>Title</h1>
 <p>Some text.</p>
-<h2><a id="heading" href="#heading" class="no-underline mr-2 text-gray-500" title="Permalink">#</a>Heading</h2>
+<h2><a id="heading" href="#heading" class="" title="Permalink">#</a>Heading</h2>
 <p>Some text.</p>
-<h2><a id="subheading" href="#subheading" class="no-underline mr-2 text-gray-500" title="Permalink">#</a>SubHeading</h2>
+<h2><a id="subheading" href="#subheading" class="" title="Permalink">#</a>SubHeading</h2>
 <p>Some text.</p>
 HTML;
 
