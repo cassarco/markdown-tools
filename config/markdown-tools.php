@@ -21,7 +21,7 @@ return [
         'markdown' => [
 
             // Give the path to a folder of markdown files or a single markdown file.
-            'path' => 'resources/markdown',
+            'path' => resource_path('markdown'),
 
             // Specify the validation rules for front-matter properties.
             'rules' => [
