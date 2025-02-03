@@ -36,7 +36,7 @@ class MarkdownTools
     private function ensureThatWeHaveAtLeastOneScheme(): void
     {
         if (empty(config('markdown-tools')['schemes'])) {
-            throw new NoSchemesDefinedException();
+            throw new NoSchemesDefinedException;
         }
     }
 
