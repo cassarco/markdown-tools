@@ -19,5 +19,5 @@ it('can validate front-matter keys with laravel validation rules',
             ]))
         );
 
-        (new MarkdownFileValidator())->withRules(['title' => 'required'])->validate($file);
+        (new MarkdownFileValidator)->withRules(['title' => 'required'])->validate($file);
     })->throws('hello-world.md: The title field is required.');

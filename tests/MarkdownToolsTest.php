@@ -6,7 +6,7 @@ use Cassarco\MarkdownTools\Facades\MarkdownTools;
 use function Pest\testDirectory;
 
 it('can be instantiated', function () {
-    expect(new MarkdownTools())->toBeInstanceOf(MarkdownTools::class);
+    expect(new MarkdownTools)->toBeInstanceOf(MarkdownTools::class);
 });
 
 it('can be called using a facade', function () {
