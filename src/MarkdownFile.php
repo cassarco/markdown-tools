@@ -46,11 +46,11 @@ class MarkdownFile
     {
         $environment = new Environment(config('markdown-tools.common-mark'));
 
-        $environment->addExtension(new WikiLinksExtension());
-        $environment->addExtension(new CommonMarkCoreExtension());
-        $environment->addExtension(new TableOfContentsExtension());
-        $environment->addExtension(new HeadingPermalinkExtension());
-        $environment->addExtension(new FrontMatterExtension(new FrontMatterParser()));
+        $environment->addExtension(new WikiLinksExtension);
+        $environment->addExtension(new CommonMarkCoreExtension);
+        $environment->addExtension(new TableOfContentsExtension);
+        $environment->addExtension(new HeadingPermalinkExtension);
+        $environment->addExtension(new FrontMatterExtension(new FrontMatterParser));
 
         $this->content = (new MarkdownConverter($environment))->convert($this->markdown());
     }
