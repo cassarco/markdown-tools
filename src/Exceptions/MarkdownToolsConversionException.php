@@ -2,6 +2,4 @@
 
 namespace Cassarco\MarkdownTools\Exceptions;
 
-class MarkdownToolsConversionException extends MarkdownToolsException
-{
-}
+class MarkdownToolsConversionException extends MarkdownToolsException {}
