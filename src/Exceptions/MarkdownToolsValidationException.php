@@ -2,6 +2,4 @@
 
 namespace Cassarco\MarkdownTools\Exceptions;
 
-class MarkdownToolsValidationException extends MarkdownToolsException
-{
-}
+class MarkdownToolsValidationException extends MarkdownToolsException {}
