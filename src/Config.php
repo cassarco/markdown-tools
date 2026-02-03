@@ -41,7 +41,7 @@ class Config
 
             if (! is_a($rules, MarkdownFileRules::class, true)) {
                 throw new InvalidConfigException(
-                    "Rules class [{$rules}] must implement " . MarkdownFileRules::class
+                    "Rules class [{$rules}] must implement ".MarkdownFileRules::class
                 );
             }
 
@@ -57,7 +57,7 @@ class Config
 
         if ($handler === null) {
             throw new InvalidConfigException(
-                "Handler class is required. Run: php artisan vendor:publish --tag=markdown-tools-actions"
+                'Handler class is required. Run: php artisan vendor:publish --tag=markdown-tools-actions'
             );
         }
 
@@ -70,7 +70,7 @@ class Config
 
             if (! is_a($handler, MarkdownFileHandler::class, true)) {
                 throw new InvalidConfigException(
-                    "Handler class [{$handler}] must implement " . MarkdownFileHandler::class
+                    "Handler class [{$handler}] must implement ".MarkdownFileHandler::class
                 );
             }
 
@@ -78,7 +78,7 @@ class Config
         }
 
         throw new InvalidConfigException(
-            "Handler must be a class name implementing " . MarkdownFileHandler::class
+            'Handler must be a class name implementing '.MarkdownFileHandler::class
         );
     }
 }

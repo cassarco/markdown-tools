@@ -4,6 +4,4 @@ namespace Cassarco\MarkdownTools\Exceptions;
 
 use Exception;
 
-class InvalidConfigException extends Exception
-{
-}
+class InvalidConfigException extends Exception {}
