@@ -2,6 +2,7 @@
 
 use Cassarco\MarkdownTools\Exceptions\NoSchemesDefinedException;
 use Cassarco\MarkdownTools\Facades\MarkdownTools;
+use Cassarco\MarkdownTools\Tests\Fixtures\TestMarkdownFileHandler;
 
 use function Pest\testDirectory;
 
@@ -13,6 +14,7 @@ it('can be called using a facade', function () {
     config()->set('markdown-tools.schemes', [
         [
             'path' => testDirectory('markdown/hello-world.md'),
+            'handler' => TestMarkdownFileHandler::class,
         ],
     ]);
 

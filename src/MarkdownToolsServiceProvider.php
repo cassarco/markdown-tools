@@ -18,6 +18,22 @@ class MarkdownToolsServiceProvider extends PackageServiceProvider
         $package
             ->name('markdown-tools')
             ->hasConfigFile()
-            ->hasCommand(MarkdownToolsCommand::class);
+            ->hasCommand(MarkdownToolsCommand::class)
+            ->hasInstallCommand(function ($command) {
+                $command
+                    ->publishConfigFile()
+                    ->publish('actions')
+                    ->askToStarRepoOnGitHub('cassarco/markdown-tools');
+            });
+    }
+
+    public function packageBooted(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../stubs/MarkdownFileHandler.php.stub' => app_path('Actions/MarkdownFileHandler.php'),
+                __DIR__.'/../stubs/MarkdownFileRules.php.stub' => app_path('Actions/MarkdownFileRules.php'),
+            ], "{$this->package->shortName()}-actions");
+        }
     }
 }

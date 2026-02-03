@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Actions;
+
+use Cassarco\MarkdownTools\Contracts\MarkdownFileHandler as MarkdownFileHandlerContract;
+use Cassarco\MarkdownTools\MarkdownFile;
+
+use function Laravel\Prompts\info;
+
+class MarkdownFileHandler implements MarkdownFileHandlerContract
+{
+    public function __invoke(MarkdownFile $file): void
+    {
+        // Example: Sync markdown files to an Eloquent model.
+        //
+        // Article::updateOrCreate([
+        //     'uuid' => $file->frontMatter()['uuid'],
+        // ], [
+        //     'uuid' => $file->frontMatter()['uuid'],
+        //     'title' => $file->frontMatter()['title'],
+        // ]);
+
+        info("Processed: {$file->pathname()}");
+    }
+}

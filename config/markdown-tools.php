@@ -1,6 +1,7 @@
 <?php
 
-use Cassarco\MarkdownTools\MarkdownFile;
+use App\Actions\MarkdownFileHandler;
+use App\Actions\MarkdownFileRules;
 use Symfony\Component\Yaml\Yaml;
 
 return [
@@ -13,30 +14,23 @@ return [
     | Configure as many "schemes" as you like. Each scheme should contain a
     | path to a single markdown file or a folder containing markdown files.
     |
+    | Publish the action stubs with: php artisan vendor:publish --tag=markdown-tools-actions
+    |
     */
 
     'schemes' => [
 
-        // Give each scheme a name for your own organisation.
-        'markdown' => [
+        // Give your scheme a name.
+        'default' => [
 
             // Give the path to a folder of markdown files or a single markdown file.
             'path' => resource_path('markdown'),
 
-            // Specify the validation rules for front-matter properties.
-            'rules' => [
-                // 'title' => 'required',
-            ],
+            // Specify validation rules for front-matter properties.
+            'rules' => MarkdownFileRules::class,
 
-            // Define a handler for each markdown file. You will have access to file:
-            //  - front-matter values
-            //  - markdown
-            //  - html
-            //  - htmlWithToc
-            //  - toc
-            'handler' => function (MarkdownFile $file) {
-                // Do Something with each Markdown File.
-            },
+            // Define a handler for each markdown file.
+            'handler' => MarkdownFileHandler::class,
         ],
     ],
 

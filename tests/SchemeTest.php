@@ -4,6 +4,7 @@ use Cassarco\MarkdownTools\Config;
 use Cassarco\MarkdownTools\Exceptions\MarkdownToolsValidationException;
 use Cassarco\MarkdownTools\MarkdownFile;
 use Cassarco\MarkdownTools\Scheme;
+use Cassarco\MarkdownTools\Tests\Fixtures\TestMarkdownFileHandler;
 use Illuminate\Support\Collection;
 
 use function Pest\testDirectory;
@@ -38,7 +39,10 @@ it('can get one file for the scheme', function () {
 
 it('can process the scheme', /** @throws MarkdownToolsValidationException */ function () {
     $scheme = new Scheme(
-        new Config(['path' => testDirectory('markdown/articles')])
+        new Config([
+            'path' => testDirectory('markdown/articles'),
+            'handler' => TestMarkdownFileHandler::class,
+        ])
     );
 
     $scheme->process();

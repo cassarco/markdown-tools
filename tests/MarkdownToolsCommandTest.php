@@ -1,8 +1,7 @@
 <?php
 
-use Cassarco\MarkdownTools\MarkdownFile;
+use Cassarco\MarkdownTools\Tests\Fixtures\TestCommandHandler;
 
-use function Laravel\Prompts\info;
 use function Pest\testDirectory;
 
 beforeEach(closure: function () {
@@ -22,9 +21,7 @@ beforeEach(closure: function () {
                 'updated_at',
                 'deleted_at',
             ],
-            'handler' => function (MarkdownFile $file) {
-                info("Processing {$file->frontMatter()['title']}");
-            },
+            'handler' => TestCommandHandler::class,
         ],
     ]);
 });

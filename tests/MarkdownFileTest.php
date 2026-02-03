@@ -4,6 +4,7 @@ use Cassarco\MarkdownTools\Config;
 use Cassarco\MarkdownTools\Exceptions\MarkdownToolsValidationException;
 use Cassarco\MarkdownTools\MarkdownFile;
 use Cassarco\MarkdownTools\Scheme;
+use Cassarco\MarkdownTools\Tests\Fixtures\TestMarkdownFileHandler;
 
 use function Pest\testDirectory;
 
@@ -59,15 +60,10 @@ it('can return the table of contents for a markdown file', function () {
 
     $expectedToc = <<<'HTML'
 <ul class="table-of-contents">
-<li>
-<a href="#title">Title</a>
+<li><a href="#title">Title</a>
 <ul>
-<li>
-<a href="#heading">Heading</a>
-</li>
-<li>
-<a href="#subheading">SubHeading</a>
-</li>
+<li><a href="#heading">Heading</a></li>
+<li><a href="#subheading">SubHeading</a></li>
 </ul>
 </li>
 </ul>
@@ -86,15 +82,10 @@ it('can return the html with embedded table of contents for a markdown file', fu
 
     $expectedToc = <<<'HTML'
 <ul class="table-of-contents">
-<li>
-<a href="#title">Title</a>
+<li><a href="#title">Title</a>
 <ul>
-<li>
-<a href="#heading">Heading</a>
-</li>
-<li>
-<a href="#subheading">SubHeading</a>
-</li>
+<li><a href="#heading">Heading</a></li>
+<li><a href="#subheading">SubHeading</a></li>
 </ul>
 </li>
 </ul>
@@ -126,6 +117,7 @@ it('can returns an empty string for the table of contents of a markdown file wit
 it('can process itself', /** @throws MarkdownToolsValidationException */ function () {
     $scheme = new Scheme(new Config([
         'path' => testDirectory('markdown/hello-world.md'),
+        'handler' => TestMarkdownFileHandler::class,
     ]));
 
     /** @var MarkdownFile $file */
