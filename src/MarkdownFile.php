@@ -46,7 +46,7 @@ class MarkdownFile
     {
         $environment = new Environment(config('markdown-tools.common-mark'));
 
-        $environment->addExtension(new WikiLinksExtension);
+        $environment->addExtension(new WikilinksExtension);
         $environment->addExtension(new CommonMarkCoreExtension);
         $environment->addExtension(new TableOfContentsExtension);
         $environment->addExtension(new HeadingPermalinkExtension);
